@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: http_access</title>
+    <meta name="keywords" content="squid squid.conf config configure http_access" />
+    <meta name="description" content="Squid 6.12  http_access " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_http_access">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_http_access">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="http_access">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="http_access">http_access</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">Deny, unless rules exist in squid.conf.
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+#
+# Recommended minimum Access Permission configuration:
+#
+# Deny requests to certain unsafe ports
+# Deny CONNECT to other than secure SSL ports
+# Only allow cachemgr access from localhost
+# This default configuration only allows localhost requests because a more
+# permissive Squid installation could introduce new attack vectors into the
+# network by proxying external TCP connections to unprotected services.
+# The two deny rules below are unnecessary in this default configuration
+# because they are followed by a "deny all" rule. However, they may become
+# critically important when you start allowing external requests below them.
+# Protect web applications running on the same server as Squid. They often
+# assume that only local users can access them at "localhost" ports.
+# Protect cloud servers that provide local users with sensitive info about
+# their server via certain well-known link-local (a.k.a. APIPA) addresses.
+#
+# INSERT YOUR OWN RULE(S) HERE TO ALLOW ACCESS FROM YOUR CLIENTS
+#
+# For example, to allow access from your local networks, you may uncomment the
+# following rule (and/or add rules that match your definition of "local"):
+# http_access allow localnet
+# And finally deny all other access to this proxy
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Allowing or Denying access based on defined access lists
+
+	To allow or deny a message received on an HTTP, HTTPS, or FTP port:
+	http_access allow|deny [!]aclname ...
+
+	NOTE on default values:
+
+	If there are no "access" lines present, the default is to deny
+	the request.
+
+	If none of the "access" lines cause a match, the default is the
+	opposite of the last line in the list.  If the last line was
+	deny, the default is allow.  Conversely, if the last line
+	is allow, the default will be deny.  For these reasons, it is a
+	good idea to have an "deny all" entry at the end of your access
+	lists to avoid potential confusion.
+
+	This clause supports both fast and slow acl types.
+	See https://wiki.squid-cache.org/SquidFaq/SquidAcl for details.
+
+CONFIG_START
+
+http_access deny !Safe_ports
+
+http_access deny CONNECT !SSL_ports
+
+http_access allow localhost manager
+http_access deny manager
+
+http_access allow localhost
+
+
+http_access deny to_localhost
+
+http_access deny to_linklocal
+
+
+
+http_access deny all
+CONFIG_END
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_http_access">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_http_access">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

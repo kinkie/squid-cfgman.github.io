@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: happy_eyeballs_connect_timeout</title>
+    <meta name="keywords" content="squid squid.conf config configure happy_eyeballs_connect_timeout" />
+    <meta name="description" content="Squid 6.12  happy_eyeballs_connect_timeout " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_happy_eyeballs_connect_timeout">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_happy_eyeballs_connect_timeout">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="happy_eyeballs_connect_timeout">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="happy_eyeballs_connect_timeout">happy_eyeballs_connect_timeout</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">happy_eyeballs_connect_timeout 250
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	This Happy Eyeballs (RFC 8305) tuning directive specifies the minimum
+	delay between opening a primary to-server connection and opening a
+	spare to-server connection for the same master transaction. This delay
+	is similar to the Connection Attempt Delay in RFC 8305, but it is only
+	applied to the first spare connection attempt. Subsequent spare
+	connection attempts use happy_eyeballs_connect_gap, and primary
+	connection attempts are not artificially delayed at all.
+
+	Terminology: The "primary" and "spare" designations are determined by
+	the order of DNS answers received by Squid: If Squid DNS AAAA query
+	was answered first, then primary connections are connections to IPv6
+	peer addresses (while spare connections use IPv4 addresses).
+	Similarly, if Squid DNS A query was answered first, then primary
+	connections are connections to IPv4 peer addresses (while spare
+	connections use IPv6 addresses).
+
+	Shorter happy_eyeballs_connect_timeout values reduce master
+	transaction response time, potentially improving user-perceived
+	response times (i.e., making user eyeballs happier). Longer delays
+	reduce both concurrent connection level and server bombardment with
+	connection requests, potentially improving overall Squid performance
+	and reducing the chance of being blocked by servers for opening too
+	many unused connections.
+
+	RFC 8305 prohibits happy_eyeballs_connect_timeout values smaller than
+	10 (milliseconds) to "avoid congestion collapse in the presence of
+	high packet-loss rates".
+
+	The following Happy Eyeballs directives place additional connection
+	opening restrictions: happy_eyeballs_connect_gap and
+	happy_eyeballs_connect_limit.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_happy_eyeballs_connect_timeout">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_happy_eyeballs_connect_timeout">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

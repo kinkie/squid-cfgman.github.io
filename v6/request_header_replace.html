@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: request_header_replace</title>
+    <meta name="keywords" content="squid squid.conf config configure request_header_replace" />
+    <meta name="description" content="Squid 6.12  request_header_replace " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_request_header_replace">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_request_header_replace">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="request_header_replace">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="request_header_replace">request_header_replace</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias">header_replace</td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--enable-http-violations</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">none
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Usage:   request_header_replace header_name message
+	Example: request_header_replace User-Agent Nutscrape/1.0 (CP/M; 8-bit)
+
+	This option allows you to change the contents of headers
+	denied with request_header_access above, by replacing them
+	with some fixed string.
+
+	This only applies to request headers, not reply headers.
+
+	By default, headers are removed if denied.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_request_header_replace">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_request_header_replace">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

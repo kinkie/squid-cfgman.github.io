@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: coredump_dir</title>
+    <meta name="keywords" content="squid squid.conf config configure coredump_dir" />
+    <meta name="description" content="Squid 6.12  coredump_dir " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_coredump_dir">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_coredump_dir">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="coredump_dir">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="coredump_dir">coredump_dir</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">Use the directory from where Squid was started.
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+# Leave coredumps in the first cache dir
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	By default Squid leaves core files in the directory from where
+	it was started. If you set 'coredump_dir' to a directory
+	that exists, Squid will chdir() to that directory at startup
+	and coredump files will be left there.
+
+	In addition to changing the directory, the process permissions are updated
+	to enable process tracing and/or coredump file generation. The details are
+	OS-specific, but look for prctl(2) PR_SET_DUMPABLE and procctl(2)
+	PROC_TRACE_CTL documentation as guiding examples.
+
+CONFIG_START
+
+coredump_dir /usr/local/squid/var/cache/squid
+CONFIG_END
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_coredump_dir">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_coredump_dir">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

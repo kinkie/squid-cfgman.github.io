@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: https_port</title>
+    <meta name="keywords" content="squid squid.conf config configure https_port" />
+    <meta name="description" content="Squid 6.12  https_port " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_https_port">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_https_port">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="https_port">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="https_port">https_port</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--with-gnutls or --with-openssl</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">none
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Usage:  [ip:]port [mode] tls-cert=certificate.pem [options]
+
+	The socket address where Squid will listen for client requests made
+	over TLS or SSL connections. Commonly referred to as HTTPS.
+
+	This is most useful for situations where you are running squid in
+	accelerator mode and you want to do the TLS work at the accelerator
+	level.
+
+	You may specify multiple socket addresses on multiple lines,
+	each with their own certificate and/or options.
+
+	The tls-cert= option is mandatory on HTTPS ports.
+
+	See http_port for a list of modes and options.
+	Not all http_port options are available for https_port.
+	Among the unavalable options:
+	- require-proxy-header
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_https_port">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_https_port">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

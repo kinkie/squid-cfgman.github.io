@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: sslproxy_cert_sign</title>
+    <meta name="keywords" content="squid squid.conf config configure sslproxy_cert_sign" />
+    <meta name="description" content="Squid 6.12  sslproxy_cert_sign " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_sslproxy_cert_sign">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_sslproxy_cert_sign">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="sslproxy_cert_sign">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="sslproxy_cert_sign">sslproxy_cert_sign</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--with-openssl</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">none
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+
+        sslproxy_cert_sign &lt;signing algorithm&gt; acl ...
+
+        The following certificate signing algorithms are supported:
+
+	   signTrusted
+		Sign using the configured CA certificate which is usually
+		placed in and trusted by end-user browsers. This is the
+		default for trusted origin server certificates.
+
+	   signUntrusted
+		Sign to guarantee an X509_V_ERR_CERT_UNTRUSTED browser error.
+		This is the default for untrusted origin server certificates
+		that are not self-signed (see ssl::certUntrusted).
+
+	   signSelf
+		Sign using a self-signed certificate with the right CN to
+		generate a X509_V_ERR_DEPTH_ZERO_SELF_SIGNED_CERT error in the
+		browser. This is the default for self-signed origin server
+		certificates (see ssl::certSelfSigned).
+
+	This clause only supports fast acl types.
+
+	When sslproxy_cert_sign acl(s) match, Squid uses the corresponding
+	signing algorithm to generate the certificate and ignores all
+	subsequent sslproxy_cert_sign options (the first match wins). If no
+	acl(s) match, the default signing algorithm is determined by errors
+	detected when obtaining and validating the origin server certificate.
+
+	WARNING: SQUID_X509_V_ERR_DOMAIN_MISMATCH and ssl:certDomainMismatch can
+	be used with sslproxy_cert_adapt, but if and only if Squid is bumping a
+	CONNECT request that carries a domain name. In all other cases (CONNECT
+	to an IP address or an intercepted SSL connection), Squid cannot detect
+	the domain mismatch at certificate generation time when
+	bump-server-first is used.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_sslproxy_cert_sign">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_sslproxy_cert_sign">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

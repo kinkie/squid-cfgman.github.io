@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: icap_service_failure_limit</title>
+    <meta name="keywords" content="squid squid.conf config configure icap_service_failure_limit" />
+    <meta name="description" content="Squid 6.12  icap_service_failure_limit " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_icap_service_failure_limit">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_icap_service_failure_limit">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="icap_service_failure_limit">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="icap_service_failure_limit">icap_service_failure_limit</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--enable-icap-client</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">icap_service_failure_limit 10
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	The limit specifies the number of failures that Squid tolerates
+	when establishing a new TCP connection with an ICAP service. If
+	the number of failures exceeds the limit, the ICAP service is
+	not used for new ICAP requests until it is time to refresh its
+	OPTIONS.
+
+	A negative value disables the limit. Without the limit, an ICAP
+	service will not be considered down due to connectivity failures
+	between ICAP OPTIONS requests.
+
+	Squid forgets ICAP service failures older than the specified
+	value of memory-depth. The memory fading algorithm
+	is approximate because Squid does not remember individual
+	errors but groups them instead, splitting the option
+	value into ten time slots of equal length.
+
+	When memory-depth is 0 and by default this option has no
+	effect on service failure expiration.
+
+	Squid always forgets failures when updating service settings
+	using an ICAP OPTIONS transaction, regardless of this option
+	setting.
+
+	For example,
+		# suspend service usage after 10 failures in 5 seconds:
+		icap_service_failure_limit 10 in 5 seconds
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_icap_service_failure_limit">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_icap_service_failure_limit">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

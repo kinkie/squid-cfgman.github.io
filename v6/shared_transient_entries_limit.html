@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: shared_transient_entries_limit</title>
+    <meta name="keywords" content="squid squid.conf config configure shared_transient_entries_limit" />
+    <meta name="description" content="Squid 6.12  shared_transient_entries_limit " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_shared_transient_entries_limit">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_shared_transient_entries_limit">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="shared_transient_entries_limit">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="shared_transient_entries_limit">shared_transient_entries_limit</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias">collapsed_forwarding_shared_entries_limit</td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">shared_transient_entries_limit 16384
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	This directive limits the size of a table used for sharing current
+	transaction information among SMP workers. A table entry stores meta
+	information about a single cache entry being delivered to Squid
+	client(s) by one or more SMP workers. A single table entry consumes
+	less than 128 shared memory bytes.
+
+	The limit should be significantly larger than the number of
+	concurrent non-collapsed cachable responses leaving Squid. For a
+	cache that handles less than 5000 concurrent requests, the default
+	setting of 16384 should be plenty.
+
+	Using excessively large values wastes shared memory. Limiting the
+	table size too much results in hash collisions, leading to lower hit
+	ratio and missed SMP request collapsing opportunities: Transactions
+	left without a table entry cannot cache their responses and are
+	invisible to other concurrent requests for the same resource.
+
+	A zero limit is allowed but unsupported. A positive small limit
+	lowers hit ratio, but zero limit disables a lot of essential
+	synchronization among SMP workers, leading to HTTP violations (e.g.,
+	stale hit responses). It also disables shared collapsed forwarding:
+	A worker becomes unable to collapse its requests on transactions in
+	other workers, resulting in more trips to the origin server and more
+	cache thrashing.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_shared_transient_entries_limit">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_shared_transient_entries_limit">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: accept_filter</title>
+    <meta name="keywords" content="squid squid.conf config configure accept_filter" />
+    <meta name="description" content="Squid 6.12  accept_filter " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_accept_filter">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_accept_filter">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="accept_filter">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="accept_filter">accept_filter</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">none
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+# FreeBSD
+# Linux
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	FreeBSD:
+
+	The name of an accept(2) filter to install on Squid's
+	listen socket(s).  This feature is perhaps specific to
+	FreeBSD and requires support in the kernel.
+
+	The 'httpready' filter delays delivering new connections
+	to Squid until a full HTTP request has been received.
+	See the accf_http(9) man page for details.
+
+	The 'dataready' filter delays delivering new connections
+	to Squid until there is some data to process.
+	See the accf_dataready(9) man page for details.
+
+	Linux:
+
+	The 'data' filter delays delivering of new connections
+	to Squid until there is some data to process by TCP_ACCEPT_DEFER.
+	You may optionally specify a number of seconds to wait by
+	'data=N' where N is the number of seconds. Defaults to 30
+	if not specified.  See the tcp(7) man page for details.
+EXAMPLE:
+accept_filter httpready
+accept_filter data
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_accept_filter">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_accept_filter">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

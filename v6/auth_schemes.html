@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: auth_schemes</title>
+    <meta name="keywords" content="squid squid.conf config configure auth_schemes" />
+    <meta name="description" content="Squid 6.12  auth_schemes " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_auth_schemes">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_auth_schemes">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="auth_schemes">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="auth_schemes">auth_schemes</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--enable-auth</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">use all auth_param schemes in their configuration order
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Use this directive to customize authentication schemes presence and
+	order in Squid's Unauthorized and Authentication Required responses.
+
+		auth_schemes scheme1,scheme2,... [!]aclname ...
+
+	where schemeN is the name of one of the authentication schemes
+	configured using auth_param directives. At least one scheme name is
+	required. Multiple scheme names are separated by commas. Either
+	avoid whitespace or quote the entire schemes list.
+
+	A special "ALL" scheme name expands to all auth_param-configured
+	schemes in their configuration order. This directive cannot be used
+	to configure Squid to offer no authentication schemes at all.
+
+	The first matching auth_schemes rule determines the schemes order
+	for the current Authentication Required transaction. Note that the
+	future response is not yet available during auth_schemes evaluation.
+
+	If this directive is not used or none of its rules match, then Squid
+	responds with all configured authentication schemes in the order of
+	auth_param directives in the configuration file.
+
+	This directive does not determine when authentication is used or
+	how each authentication scheme authenticates clients.
+
+	The following example sends basic and negotiate authentication
+	schemes, in that order, when requesting authentication of HTTP
+	requests matching the isIE ACL (not shown) while sending all
+	auth_param schemes in their configuration order to other clients:
+
+		auth_schemes basic,negotiate isIE
+		auth_schemes ALL all # explicit default
+
+	This directive supports fast ACLs only.
+
+	See also: auth_param.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_auth_schemes">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_auth_schemes">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

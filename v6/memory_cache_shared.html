@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: memory_cache_shared</title>
+    <meta name="keywords" content="squid squid.conf config configure memory_cache_shared" />
+    <meta name="description" content="Squid 6.12  memory_cache_shared " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_memory_cache_shared">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_memory_cache_shared">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="memory_cache_shared">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="memory_cache_shared">memory_cache_shared</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">"on" where supported if doing memory caching with multiple SMP workers.
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Controls whether the memory cache is shared among SMP workers.
+
+	The shared memory cache is meant to occupy cache_mem bytes and replace
+	the non-shared memory cache, although some entities may still be
+	cached locally by workers for now (e.g., internal and in-transit
+	objects may be served from a local memory cache even if shared memory
+	caching is enabled).
+
+	By default, the memory cache is shared if and only if all of the
+	following conditions are satisfied: Squid runs in SMP mode with
+	multiple workers, cache_mem is positive, and Squid environment
+	supports required IPC primitives (e.g., POSIX shared memory segments
+	and GCC-style atomic operations).
+
+	To avoid blocking locks, shared memory uses opportunistic algorithms
+	that do not guarantee that every cachable entity that could have been
+	shared among SMP workers will actually be shared.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_memory_cache_shared">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_memory_cache_shared">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

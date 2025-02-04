@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: sslproxy_cert_adapt</title>
+    <meta name="keywords" content="squid squid.conf config configure sslproxy_cert_adapt" />
+    <meta name="description" content="Squid 6.12  sslproxy_cert_adapt " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_sslproxy_cert_adapt">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_sslproxy_cert_adapt">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="sslproxy_cert_adapt">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="sslproxy_cert_adapt">sslproxy_cert_adapt</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--with-openssl</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">none
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+
+	sslproxy_cert_adapt &lt;adaptation algorithm&gt; acl ...
+
+	The following certificate adaptation algorithms are supported:
+
+	   setValidAfter
+		Sets the "Not After" property to the "Not After" property of
+		the CA certificate used to sign generated certificates.
+
+	   setValidBefore
+		Sets the "Not Before" property to the "Not Before" property of
+		the CA certificate used to sign generated certificates.
+
+	   setCommonName or setCommonName{CN}
+		Sets Subject.CN property to the host name specified as a
+		CN parameter or, if no explicit CN parameter was specified,
+		extracted from the CONNECT request. It is a misconfiguration
+		to use setCommonName without an explicit parameter for
+		intercepted or tproxied SSL connections.
+
+	This clause only supports fast acl types.
+
+	Squid first groups sslproxy_cert_adapt options by adaptation algorithm.
+	Within a group, when sslproxy_cert_adapt acl(s) match, Squid uses the
+	corresponding adaptation algorithm to generate the certificate and
+	ignores all subsequent sslproxy_cert_adapt options in that algorithm's
+	group (i.e., the first match wins within each algorithm group). If no
+	acl(s) match, the default mimicking action takes place.
+
+	WARNING: SQUID_X509_V_ERR_DOMAIN_MISMATCH and ssl:certDomainMismatch can
+	be used with sslproxy_cert_adapt, but if and only if Squid is bumping a
+	CONNECT request that carries a domain name. In all other cases (CONNECT
+	to an IP address or an intercepted SSL connection), Squid cannot detect
+	the domain mismatch at certificate generation time when
+	bump-server-first is used.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_sslproxy_cert_adapt">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_sslproxy_cert_adapt">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

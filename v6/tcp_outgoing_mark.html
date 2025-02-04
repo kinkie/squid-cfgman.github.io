@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: tcp_outgoing_mark</title>
+    <meta name="keywords" content="squid squid.conf config configure tcp_outgoing_mark" />
+    <meta name="description" content="Squid 6.12  tcp_outgoing_mark " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_tcp_outgoing_mark">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_tcp_outgoing_mark">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="tcp_outgoing_mark">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="tcp_outgoing_mark">tcp_outgoing_mark</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">Packet MARK (Linux)</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">none
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Allows you to apply a Netfilter mark value to outgoing packets
+	on the server side, based on an ACL.
+
+	tcp_outgoing_mark mark-value [!]aclname ...
+
+	Example where normal_service_net uses the mark value 0x00
+	and good_service_net uses 0x20
+
+	acl normal_service_net src 10.0.0.0/24
+	acl good_service_net src 10.0.1.0/24
+	tcp_outgoing_mark 0x00 normal_service_net
+	tcp_outgoing_mark 0x20 good_service_net
+
+	Only fast ACLs are supported.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_tcp_outgoing_mark">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_tcp_outgoing_mark">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: collapsed_forwarding</title>
+    <meta name="keywords" content="squid squid.conf config configure collapsed_forwarding" />
+    <meta name="description" content="Squid 6.12  collapsed_forwarding " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_collapsed_forwarding">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_collapsed_forwarding">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="collapsed_forwarding">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="collapsed_forwarding">collapsed_forwarding</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">collapsed_forwarding off
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+       This option controls whether Squid is allowed to merge multiple
+       potentially cachable requests for the same URI before Squid knows
+       whether the response is going to be cachable.
+
+       When enabled, instead of forwarding each concurrent request for
+       the same URL, Squid just sends the first of them. The other, so
+       called "collapsed" requests, wait for the response to the first
+       request and, if it happens to be cachable, use that response.
+       Here, "concurrent requests" means "received after the first
+       request headers were parsed and before the corresponding response
+       headers were parsed".
+
+       This feature is disabled by default: enabling collapsed
+       forwarding needlessly delays forwarding requests that look
+       cachable (when they are collapsed) but then need to be forwarded
+       individually anyway because they end up being for uncachable
+       content. However, in some cases, such as acceleration of highly
+       cachable content with periodic or grouped expiration times, the
+       gains from collapsing [large volumes of simultaneous refresh
+       requests] outweigh losses from such delays.
+
+       Squid collapses two kinds of requests: regular client requests
+       received on one of the listening ports and internal "cache
+       revalidation" requests which are triggered by those regular
+       requests hitting a stale cached object. Revalidation collapsing
+       is currently disabled for Squid instances containing SMP-aware
+       disk or memory caches and for Vary-controlled cached objects.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_collapsed_forwarding">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_collapsed_forwarding">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

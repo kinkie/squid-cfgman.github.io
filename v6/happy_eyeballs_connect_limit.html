@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: happy_eyeballs_connect_limit</title>
+    <meta name="keywords" content="squid squid.conf config configure happy_eyeballs_connect_limit" />
+    <meta name="description" content="Squid 6.12  happy_eyeballs_connect_limit " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_happy_eyeballs_connect_limit">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_happy_eyeballs_connect_limit">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="happy_eyeballs_connect_limit">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="happy_eyeballs_connect_limit">happy_eyeballs_connect_limit</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">no artificial limit on the number of concurrent spare attempts
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	This Happy Eyeballs (RFC 8305) tuning directive specifies the
+	maximum number of spare to-server connections (to any server; i.e.
+	across all concurrent master transactions in a Squid instance).
+	Each SMP worker gets an equal share of the total limit. However,
+	the workers do not share the actual connection counts yet, so one
+	(busier) worker cannot "borrow" spare connection slots from another
+	(less loaded) worker.
+
+	Setting this limit to zero disables concurrent use of primary and
+	spare TCP connections: Spare connection attempts are made only after
+	all primary attempts fail. However, Squid would still use the
+	DNS-related optimizations of the Happy Eyeballs approach.
+
+	This directive has similar trade-offs as happy_eyeballs_connect_gap,
+	but its focus is on limiting Squid overheads, while
+	happy_eyeballs_connect_gap focuses on the origin server and peer
+	overheads.
+
+	The following Happy Eyeballs directives place additional connection
+	opening restrictions: happy_eyeballs_connect_timeout and
+	happy_eyeballs_connect_gap. See the former for related terminology.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_happy_eyeballs_connect_limit">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_happy_eyeballs_connect_limit">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

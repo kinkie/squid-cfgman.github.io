@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: dns_packet_max</title>
+    <meta name="keywords" content="squid squid.conf config configure dns_packet_max" />
+    <meta name="description" content="Squid 6.12  dns_packet_max " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_dns_packet_max">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_dns_packet_max">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="dns_packet_max">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="dns_packet_max">dns_packet_max</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">EDNS disabled
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Maximum number of bytes packet size to advertise via EDNS.
+	Set to "none" to disable EDNS large packet support.
+
+	For legacy reasons DNS UDP replies will default to 512 bytes which
+	is too small for many responses. EDNS provides a means for Squid to
+	negotiate receiving larger responses back immediately without having
+	to failover with repeat requests. Responses larger than this limit
+	will retain the old behaviour of failover to TCP DNS.
+
+	Squid has no real fixed limit internally, but allowing packet sizes
+	over 1500 bytes requires network jumbogram support and is usually not
+	necessary.
+
+	WARNING: The RFC also indicates that some older resolvers will reply
+	with failure of the whole request if the extension is added. Some
+	resolvers have already been identified which will reply with mangled
+	EDNS response on occasion. Usually in response to many-KB jumbogram
+	sizes being advertised by Squid.
+	Squid will currently treat these both as an unable-to-resolve domain
+	even if it would be resolvable without EDNS.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_dns_packet_max">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_dns_packet_max">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

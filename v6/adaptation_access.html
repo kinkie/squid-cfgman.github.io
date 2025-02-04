@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2024 The Squid Software Foundation and contributors">
+    <title>Squid 6.12 Configuration File: adaptation_access</title>
+    <meta name="keywords" content="squid squid.conf config configure adaptation_access" />
+    <meta name="description" content="Squid 6.12  adaptation_access " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_adaptation_access">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_adaptation_access">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="adaptation_access">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="adaptation_access">adaptation_access</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--enable-ecap or --enable-icap-client</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">Allow, unless rules exist in squid.conf.
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Sends an HTTP transaction to an ICAP or eCAP adaptation	service.
+
+	adaptation_access service_name allow|deny [!]aclname...
+	adaptation_access set_name     allow|deny [!]aclname...
+
+	At each supported vectoring point, the adaptation_access
+	statements are processed in the order they appear in this
+	configuration file. Statements pointing to the following services
+	are ignored (i.e., skipped without checking their ACL):
+
+	    - services serving different vectoring points
+	    - "broken-but-bypassable" services
+	    - "up" services configured to ignore such transactions
+              (e.g., based on the ICAP Transfer-Ignore header).
+
+        When a set_name is used, all services in the set are checked
+	using the same rules, to find the first applicable one. See
+	adaptation_service_set for details.
+
+	If an access list is checked and there is a match, the
+	processing stops: For an "allow" rule, the corresponding
+	adaptation service is used for the transaction. For a "deny"
+	rule, no adaptation service is activated.
+
+	It is currently not possible to apply more than one adaptation
+	service at the same vectoring point to the same HTTP transaction.
+
+        See also: icap_service and ecap_service
+
+Example:
+adaptation_access service_1 allow all
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_adaptation_access">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_adaptation_access">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>
