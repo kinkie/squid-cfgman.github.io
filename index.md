@@ -3,8 +3,7 @@ arguments:
 -    dir: the prefix in the path of pages to consider
 -    numbers: true if you want the list to be numbered
 {%- endcomment -%}
-{%- if include.numbers -%}{%- assign prefix = "1."-%}{%- else -%}{%- assign prefix = "*"-%}{%- endif -%}
-{%- assign pdir = site.pages | where_exp: "p", "p.url contains include.dir" -%}
+{%- assign pdir = site.pages -%}
 {% for p in pdir -%}
 {%- assign purl = p.url | replace: page.dir, "" | replace: ".html", "" -%}
 {%- if purl == "" -%}{%- continue -%}{%- endif -%}
