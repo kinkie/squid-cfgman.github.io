@@ -1,3 +1,20 @@
 theme: jekyll-theme-minimal
 title: Squid configuration manual
 description: "Reference manual for squid's configuraiton directives"
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-sitemap
+  - jekyll-optional-front-matter
+  - jekyll-relative-links
+  - jekyll-titles-from-headings
+  - jemoji
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+      permalink: :path/:basename # make sitemap.xml not include .html
