@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2023 The Squid Software Foundation and contributors">
+    <title>Squid 7.0.0 Configuration File: http_port</title>
+    <meta name="keywords" content="squid squid.conf config configure http_port" />
+    <meta name="description" content="Squid 7.0.0  http_port " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_http_port">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_http_port">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="http_port">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="http_port">http_port</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias">ascii_port</td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">none
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+# Squid normally listens to port 3128
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Usage:	port [mode] [options]
+		hostname:port [mode] [options]
+		1.2.3.4:port [mode] [options]
+
+	The socket addresses where Squid will listen for HTTP client
+	requests.  You may specify multiple socket addresses.
+	There are three forms: port alone, hostname with port, and
+	IP address with port.  If you specify a hostname or IP
+	address, Squid binds the socket to that specific
+	address. Most likely, you do not need to bind to a specific
+	address, so you can use the port number alone.
+
+	If you are running Squid in accelerator mode, you
+	probably want to listen on port 80 also, or instead.
+
+	The -a command line option may be used to specify additional
+	port(s) where Squid listens for proxy request. Such ports will
+	be plain proxy ports with no options.
+
+	You may specify multiple socket addresses on multiple lines.
+
+	Modes:
+
+	   intercept	Support for IP-Layer NAT interception delivering
+			traffic to this Squid port.
+			NP: disables authentication on the port.
+
+	   tproxy	Support Linux TPROXY (or BSD divert-to) with spoofing
+			of outgoing connections using the client IP address.
+			NP: disables authentication on the port.
+
+	   accel	Accelerator / reverse proxy mode
+
+	   ssl-bump	For each CONNECT request allowed by ssl_bump ACLs,
+			establish secure connection with the client and with
+			the server, decrypt HTTPS messages as they pass through
+			Squid, and treat them as unencrypted HTTP messages,
+			becoming the man-in-the-middle.
+
+			The ssl_bump option is required to fully enable
+			bumping of CONNECT requests.
+
+	Omitting the mode flag causes default forward proxy mode to be used.
+
+
+	Accelerator Mode Options:
+
+	   defaultsite=domainname
+			What to use for the Host: header if it is not present
+			in a request. Determines what site (not origin server)
+			accelerators should consider the default.
+
+	   no-vhost	Disable using HTTP/1.1 Host header for virtual domain support.
+
+	   protocol=	Protocol to reconstruct accelerated and intercepted
+			requests with. Defaults to HTTP/1.1 for http_port and
+			HTTPS/1.1 for https_port.
+			When an unsupported value is configured Squid will
+			produce a FATAL error.
+			Values: HTTP or HTTP/1.1, HTTPS or HTTPS/1.1
+
+	   vport	Virtual host port support. Using the http_port number
+			instead of the port passed on Host: headers.
+
+	   vport=NN	Virtual host port support. Using the specified port
+			number instead of the port passed on Host: headers.
+
+	   act-as-origin
+			Act as if this Squid is the origin server.
+			This currently means generate new Date: and Expires:
+			headers on HIT instead of adding Age:.
+
+	   ignore-cc	Ignore request Cache-Control headers.
+
+			WARNING: This option violates HTTP specifications if
+			used in non-accelerator setups.
+
+	   allow-direct	Allow direct forwarding in accelerator mode. Normally
+			accelerated requests are denied direct forwarding as if
+			never_direct was used.
+
+			WARNING: this option opens accelerator mode to security
+			vulnerabilities usually only affecting in interception
+			mode. Make sure to protect forwarding with suitable
+			http_access rules when using this.
+
+
+	SSL Bump Mode Options:
+	    In addition to these options ssl-bump requires TLS/SSL options.
+
+	   generate-host-certificates[=&lt;on|off&gt;]
+			Dynamically create SSL server certificates for the
+			destination hosts of bumped CONNECT requests.When
+			enabled, the cert and key options are used to sign
+			generated certificates. Otherwise generated
+			certificate will be selfsigned.
+			If there is a CA certificate lifetime of the generated
+			certificate equals lifetime of the CA certificate. If
+			generated certificate is selfsigned lifetime is three
+			years.
+			This option is enabled by default when ssl-bump is used.
+			See the ssl-bump option above for more information.
+
+	   dynamic_cert_mem_cache_size=SIZE
+			Approximate total RAM size spent on cached generated
+			certificates. If set to zero, caching is disabled. The
+			default value is 4MB.
+
+	TLS / SSL Options:
+
+	   tls-cert=	Path to file containing an X.509 certificate (PEM format)
+			to be used in the TLS handshake ServerHello.
+
+			If this certificate is constrained by KeyUsage TLS
+			feature it must allow HTTP server usage, along with
+			any additional restrictions imposed by your choice
+			of options= settings.
+
+			When OpenSSL is used this file may also contain a
+			chain of intermediate CA certificates to send in the
+			TLS handshake.
+
+			When GnuTLS is used this option (and any paired
+			tls-key= option) may be repeated to load multiple
+			certificates for different domains.
+
+			Also, when generate-host-certificates=on is configured
+			the first tls-cert= option must be a CA certificate
+			capable of signing the automatically generated
+			certificates.
+
+	   tls-key=	Path to a file containing private key file (PEM format)
+			for the previous tls-cert= option.
+
+			If tls-key= is not specified tls-cert= is assumed to
+			reference a PEM file containing both the certificate
+			and private key.
+
+	   cipher=	Colon separated list of supported ciphers.
+			NOTE: some ciphers such as EDH ciphers depend on
+			      additional settings. If those settings are
+			      omitted the ciphers may be silently ignored
+			      by the OpenSSL library.
+
+	   options=	Various SSL implementation options. The most important
+			being:
+
+			    NO_SSLv3    Disallow the use of SSLv3
+
+			    NO_TLSv1    Disallow the use of TLSv1.0
+
+			    NO_TLSv1_1  Disallow the use of TLSv1.1
+
+			    NO_TLSv1_2  Disallow the use of TLSv1.2
+
+			    SINGLE_DH_USE
+				      Always create a new key when using
+				      temporary/ephemeral DH key exchanges
+
+			    SINGLE_ECDH_USE
+				      Enable ephemeral ECDH key exchange.
+				      The adopted curve should be specified
+				      using the tls-dh option.
+
+			    NO_TICKET
+				      Disable use of RFC5077 session tickets.
+				      Some servers may have problems
+				      understanding the TLS extension due
+				      to ambiguous specification in RFC4507.
+
+			    ALL       Enable various bug workarounds
+				      suggested as "harmless" by OpenSSL
+				      Be warned that this reduces SSL/TLS
+				      strength to some attacks.
+
+			See the OpenSSL SSL_CTX_set_options documentation for a
+			more complete list.
+
+	   clientca=	File containing the list of CAs to use when
+			requesting a client certificate.
+
+	   tls-cafile=	PEM file containing CA certificates to use when verifying
+			client certificates. If not configured clientca will be
+			used. May be repeated to load multiple files.
+
+	   capath=	Directory containing additional CA certificates
+			and CRL lists to use when verifying client certificates.
+			Requires OpenSSL or LibreSSL.
+
+	   crlfile=	File of additional CRL lists to use when verifying
+			the client certificate, in addition to CRLs stored in
+			the capath. Implies VERIFY_CRL flag below.
+
+	   tls-dh=[curve:]file
+			File containing DH parameters for temporary/ephemeral DH key
+			exchanges, optionally prefixed by a curve for ephemeral ECDH
+			key exchanges.
+			See OpenSSL documentation for details on how to create the
+			DH parameter file. Supported curves for ECDH can be listed
+			using the "openssl ecparam -list_curves" command.
+			WARNING: EDH and EECDH ciphers will be silently disabled if
+				 this option is not set.
+
+	   sslflags=	Various flags modifying the use of SSL:
+			    DELAYED_AUTH
+				Don't request client certificates
+				immediately, but wait until acl processing
+				requires a certificate (not yet implemented).
+			    CONDITIONAL_AUTH
+				Request a client certificate during the TLS
+				handshake, but ignore certificate absence in
+				the TLS client Hello. If the client does
+				supply a certificate, it is validated.
+			    NO_SESSION_REUSE
+				Don't allow for session reuse. Each connection
+				will result in a new SSL session.
+			    VERIFY_CRL
+				Verify CRL lists when accepting client
+				certificates.
+			    VERIFY_CRL_ALL
+				Verify CRL lists for all certificates in the
+				client certificate chain.
+
+	   tls-default-ca[=off]
+			Whether to use the system Trusted CAs. Default is OFF.
+
+	   tls-no-npn	Do not use the TLS NPN extension to advertise HTTP/1.1.
+
+	   sslcontext=	SSL session ID context identifier.
+
+	Other Options:
+
+	   connection-auth[=on|off]
+	                use connection-auth=off to tell Squid to prevent
+	                forwarding Microsoft connection oriented authentication
+			(NTLM, Negotiate and Kerberos)
+
+	   disable-pmtu-discovery=
+			Control Path-MTU discovery usage:
+			    off		lets OS decide on what to do (default).
+			    transparent	disable PMTU discovery when transparent
+					support is enabled.
+			    always	disable always PMTU discovery.
+
+			In many setups of transparently intercepting proxies
+			Path-MTU discovery can not work on traffic towards the
+			clients. This is the case when the intercepting device
+			does not fully track connections and fails to forward
+			ICMP must fragment messages to the cache server. If you
+			have such setup and experience that certain clients
+			sporadically hang or never complete requests set
+			disable-pmtu-discovery option to 'transparent'.
+
+	   name=	Specifies a internal name for the port. Defaults to
+			the port specification (port or addr:port)
+
+	   tcpkeepalive[=idle,interval,timeout]
+			Enable TCP keepalive probes of idle connections.
+			In seconds; idle is the initial time before TCP starts
+			probing the connection, interval how often to probe, and
+			timeout the time before giving up.
+
+	   require-proxy-header
+			Require PROXY protocol version 1 or 2 connections.
+			The proxy_protocol_access is required to permit
+			downstream proxies which can be trusted.
+
+	   worker-queues
+			Ask TCP stack to maintain a dedicated listening queue
+			for each worker accepting requests at this port.
+			Requires TCP stack that supports the SO_REUSEPORT socket
+			option.
+
+			SECURITY WARNING: Enabling worker-specific queues
+			allows any process running as Squid's effective user to
+			easily accept requests destined to this port.
+
+	If you run Squid on a dual-homed machine with an internal
+	and an external interface we recommend you to specify the
+	internal address:port in http_port. This way Squid will only be
+	visible on the internal address.
+
+CONFIG_START
+
+http_port 3128
+CONFIG_END
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_http_port">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_http_port">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

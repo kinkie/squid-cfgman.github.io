@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2023 The Squid Software Foundation and contributors">
+    <title>Squid 7.0.0 Configuration File: max_filedescriptors</title>
+    <meta name="keywords" content="squid squid.conf config configure max_filedescriptors" />
+    <meta name="description" content="Squid 7.0.0  max_filedescriptors " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_max_filedescriptors">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_max_filedescriptors">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="max_filedescriptors">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="max_filedescriptors">max_filedescriptors</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias">max_filedesc</td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">Use operating system soft limit set by ulimit.
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Set the maximum number of filedescriptors, either below the
+	operating system default or up to the hard limit.
+
+	Remove from squid.conf to inherit the current ulimit soft
+	limit setting.
+
+	Note: Changing this requires a restart of Squid. Also
+	not all I/O types supports large values (eg on Windows).
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_max_filedescriptors">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_max_filedescriptors">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

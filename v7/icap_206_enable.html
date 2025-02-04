@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2023 The Squid Software Foundation and contributors">
+    <title>Squid 7.0.0 Configuration File: icap_206_enable</title>
+    <meta name="keywords" content="squid squid.conf config configure icap_206_enable" />
+    <meta name="description" content="Squid 7.0.0  icap_206_enable " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_icap_206_enable">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_icap_206_enable">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="icap_206_enable">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="icap_206_enable">icap_206_enable</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--enable-icap-client</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">icap_206_enable on
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	206 (Partial Content) responses is an ICAP extension that allows the
+	ICAP agents to optionally combine adapted and original HTTP message
+	content. The decision to combine is postponed until the end of the
+	ICAP response. Squid supports Partial Content extension by default.
+
+	Activation of the Partial Content extension is negotiated with each
+	ICAP service during OPTIONS exchange. Most ICAP servers should handle
+	negotiation correctly even if they do not support the extension, but
+	some might fail. To disable Partial Content support for all ICAP
+	services and to avoid any negotiation, set this option to "off".
+
+	Example:
+	    icap_206_enable off
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_icap_206_enable">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_icap_206_enable">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2023 The Squid Software Foundation and contributors">
+    <title>Squid 7.0.0 Configuration File: cache_peer_access</title>
+    <meta name="keywords" content="squid squid.conf config configure cache_peer_access" />
+    <meta name="description" content="Squid 7.0.0  cache_peer_access " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_cache_peer_access">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_cache_peer_access">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="cache_peer_access">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="cache_peer_access">cache_peer_access</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">No peer usage restrictions.
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Restricts usage of cache_peer proxies.
+
+	Usage:
+		cache_peer_access peer-name allow|deny [!]aclname ...
+
+	For the required peer-name parameter, use either the value of the
+	cache_peer name=value parameter or, if name=value is missing, the
+	cache_peer hostname parameter.
+
+	This directive narrows down the selection of peering candidates, but
+	does not determine the order in which the selected candidates are
+	contacted. That order is determined by the peer selection algorithms
+	(see PEER SELECTION sections in the cache_peer documentation).
+
+	If a deny rule matches, the corresponding peer will not be contacted
+	for the current transaction -- Squid will not send ICP queries and
+	will not forward HTTP requests to that peer. An allow match leaves
+	the corresponding peer in the selection. The first match for a given
+	peer wins for that peer.
+
+	The relative order of cache_peer_access directives for the same peer
+	matters. The relative order of any two cache_peer_access directives
+	for different peers does not matter. To ease interpretation, it is a
+	good idea to group cache_peer_access directives for the same peer
+	together.
+
+	A single cache_peer_access directive may be evaluated multiple times
+	for a given transaction because individual peer selection algorithms
+	may check it independently from each other. These redundant checks
+	may be optimized away in future Squid versions.
+
+	This clause only supports fast acl types.
+	See https://wiki.squid-cache.org/SquidFaq/SquidAcl for details.
+
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_cache_peer_access">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_cache_peer_access">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

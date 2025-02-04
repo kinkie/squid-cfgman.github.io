@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2023 The Squid Software Foundation and contributors">
+    <title>Squid 7.0.0 Configuration File: connect_retries</title>
+    <meta name="keywords" content="squid squid.conf config configure connect_retries" />
+    <meta name="description" content="Squid 7.0.0  connect_retries " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_connect_retries">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_connect_retries">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="connect_retries">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="connect_retries">connect_retries</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">Do not retry failed connections.
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Limits the number of reopening attempts when establishing a single
+	TCP connection. All these attempts must still complete before the
+	applicable connection opening timeout expires.
+
+	By default and when connect_retries is set to zero, Squid does not
+	retry failed connection opening attempts.
+
+	The (not recommended) maximum is 10 tries. An attempt to configure a
+	higher value results in the value of 10 being used (with a warning).
+
+	Squid may open connections to retry various high-level forwarding
+	failures. For an outside observer, that activity may look like a
+	low-level connection reopening attempt, but those high-level retries
+	are governed by forward_max_tries instead.
+
+	See also: connect_timeout, forward_timeout, icap_connect_timeout,
+	and forward_max_tries.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_connect_retries">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_connect_retries">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2023 The Squid Software Foundation and contributors">
+    <title>Squid 7.0.0 Configuration File: neighbor_type_domain</title>
+    <meta name="keywords" content="squid squid.conf config configure neighbor_type_domain" />
+    <meta name="description" content="Squid 7.0.0  neighbor_type_domain " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_neighbor_type_domain">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_neighbor_type_domain">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="neighbor_type_domain">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="neighbor_type_domain">neighbor_type_domain</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">The peer type from cache_peer directive is used for all requests to that peer.
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Modify the cache_peer neighbor type when passing requests
+	about specific domains to the peer.
+
+	Usage:
+		neighbor_type_domain peer-name parent|sibling domain...
+
+	For the required peer-name parameter, use either the value of the
+	cache_peer name=value parameter or, if name=value is missing, the
+	cache_peer hostname parameter.
+
+	For example:
+		cache_peer foo.example.com parent 3128 3130
+		neighbor_type_domain foo.example.com sibling .au .de
+
+	The above configuration treats all requests to foo.example.com as a
+	parent proxy unless the request is for a .au or .de ccTLD domain name.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_neighbor_type_domain">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_neighbor_type_domain">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

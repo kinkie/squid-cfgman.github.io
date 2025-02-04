@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2023 The Squid Software Foundation and contributors">
+    <title>Squid 7.0.0 Configuration File: pipeline_prefetch</title>
+    <meta name="keywords" content="squid squid.conf config configure pipeline_prefetch" />
+    <meta name="description" content="Squid 7.0.0  pipeline_prefetch " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_pipeline_prefetch">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_pipeline_prefetch">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="pipeline_prefetch">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="pipeline_prefetch">pipeline_prefetch</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">Do not pre-parse pipelined requests.
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	HTTP clients may send a pipeline of 1+N requests to Squid using a
+	single connection, without waiting for Squid to respond to the first
+	of those requests. This option limits the number of concurrent
+	requests Squid will try to handle in parallel. If set to N, Squid
+	will try to receive and process up to 1+N requests on the same
+	connection concurrently.
+
+	Defaults to 0 (off) for bandwidth management and access logging
+	reasons.
+
+	NOTE: pipelining requires persistent connections to clients.
+
+	WARNING: pipelining breaks NTLM and Negotiate/Kerberos authentication.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_pipeline_prefetch">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_pipeline_prefetch">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

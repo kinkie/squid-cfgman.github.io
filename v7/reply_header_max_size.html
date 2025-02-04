@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2023 The Squid Software Foundation and contributors">
+    <title>Squid 7.0.0 Configuration File: reply_header_max_size</title>
+    <meta name="keywords" content="squid squid.conf config configure reply_header_max_size" />
+    <meta name="description" content="Squid 7.0.0  reply_header_max_size " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_reply_header_max_size">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_reply_header_max_size">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="reply_header_max_size">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="reply_header_max_size">reply_header_max_size</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">reply_header_max_size 64 KB
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	This directives limits the header size of a received HTTP response
+	(including status-line). Increasing this limit beyond its 64 KB default
+	exposes certain old Squid code to various denial-of-service attacks. This
+	limit also applies to FTP command responses.
+
+	Squid also checks this limit when loading hit responses from disk cache.
+
+	Squid does not check this limit when sending responses.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_reply_header_max_size">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_reply_header_max_size">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

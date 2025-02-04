@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2023 The Squid Software Foundation and contributors">
+    <title>Squid 7.0.0 Configuration File: miss_access</title>
+    <meta name="keywords" content="squid squid.conf config configure miss_access" />
+    <meta name="description" content="Squid 7.0.0  miss_access " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_miss_access">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_miss_access">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="miss_access">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="miss_access">miss_access</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">Allow, unless rules exist in squid.conf.
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Determines whether network access is permitted when satisfying a request.
+
+	For example;
+	    to force your neighbors to use you as a sibling instead of
+	    a parent.
+
+		acl localclients src 192.0.2.0/24 2001:DB8::a:0/64
+		miss_access deny  !localclients
+		miss_access allow all
+
+	This means only your local clients are allowed to fetch relayed/MISS
+	replies from the network and all other clients can only fetch cached
+	objects (HITs).
+
+	The default for this setting allows all clients who passed the
+	http_access rules to relay via this proxy.
+
+	This clause only supports fast acl types.
+	See https://wiki.squid-cache.org/SquidFaq/SquidAcl for details.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_miss_access">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_miss_access">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

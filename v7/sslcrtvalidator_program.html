@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2023 The Squid Software Foundation and contributors">
+    <title>Squid 7.0.0 Configuration File: sslcrtvalidator_program</title>
+    <meta name="keywords" content="squid squid.conf config configure sslcrtvalidator_program" />
+    <meta name="description" content="Squid 7.0.0  sslcrtvalidator_program " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_sslcrtvalidator_program">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_sslcrtvalidator_program">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="sslcrtvalidator_program">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="sslcrtvalidator_program">sslcrtvalidator_program</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--with-openssl</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">none
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Specify the location and options of the executable for ssl_crt_validator
+	process.
+
+	Usage:  sslcrtvalidator_program [ttl=...] [cache=n] path ...
+
+	Options:
+
+	cache=bytes
+		Limits how much memory Squid can use for caching validator
+		responses. The default is 67108864 (i.e. 64 MB).
+		Reconfiguration purges any excess entries. To disable caching,
+		use cache=0. Currently, cache entry sizes are seriously
+		underestimated. Even with that bug, a typical estimate for a
+		single cache entry size would be at least a few kilobytes (the
+		size of the PEM certificates sent to the validator).
+
+	ttl=&lt;seconds|"infinity"&gt;
+		Approximately how long Squid may reuse the validator results
+		for. The default is 3600 (i.e. 1 hour). Using ttl=infinity
+		disables TTL checks. Reconfiguration does not affect TTLs of
+		the already cached entries. To disable caching, use zero cache
+		size, not zero TTL -- zero TTL allows reuse for the remainder
+		of the second when the result was cached.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_sslcrtvalidator_program">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_sslcrtvalidator_program">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

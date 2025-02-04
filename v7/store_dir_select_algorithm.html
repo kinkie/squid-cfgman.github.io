@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2023 The Squid Software Foundation and contributors">
+    <title>Squid 7.0.0 Configuration File: store_dir_select_algorithm</title>
+    <meta name="keywords" content="squid squid.conf config configure store_dir_select_algorithm" />
+    <meta name="description" content="Squid 7.0.0  store_dir_select_algorithm " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_store_dir_select_algorithm">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_store_dir_select_algorithm">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="store_dir_select_algorithm">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="store_dir_select_algorithm">store_dir_select_algorithm</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">store_dir_select_algorithm least-load
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	How Squid selects which cache_dir to use when the response
+	object will fit into more than one.
+
+	Regardless of which algorithm is used the cache_dir min-size
+	and max-size parameters are obeyed. As such they can affect
+	the selection algorithm by limiting the set of considered
+	cache_dir.
+
+	Algorithms:
+
+		least-load
+
+	This algorithm is suited to caches with similar cache_dir
+	sizes and disk speeds.
+
+	The disk with the least I/O pending is selected.
+	When there are multiple disks with the same I/O load ranking
+	the cache_dir with most available capacity is selected.
+
+	When a mix of cache_dir sizes are configured the faster disks
+	have a naturally lower I/O loading and larger disks have more
+	capacity. So space used to store objects and data throughput
+	may be very unbalanced towards larger disks.
+
+
+		round-robin
+
+	This algorithm is suited to caches with unequal cache_dir
+	disk sizes.
+
+	Each cache_dir is selected in a rotation. The next suitable
+	cache_dir is used.
+
+	Available cache_dir capacity is only considered in relation
+	to whether the object will fit and meets the min-size and
+	max-size parameters.
+
+	Disk I/O loading is only considered to prevent overload on slow
+	disks. This algorithm does not spread objects by size, so any
+	I/O loading per-disk may appear very unbalanced and volatile.
+
+	If several cache_dirs use similar min-size, max-size, or other
+	limits to to reject certain responses, then do not group such
+	cache_dir lines together, to avoid round-robin selection bias
+	towards the first cache_dir after the group. Instead, interleave
+	cache_dir lines from different groups. For example:
+
+		store_dir_select_algorithm round-robin
+		cache_dir rock /hdd1 ... min-size=100000
+		cache_dir rock /ssd1 ... max-size=99999
+		cache_dir rock /hdd2 ... min-size=100000
+		cache_dir rock /ssd2 ... max-size=99999
+		cache_dir rock /hdd3 ... min-size=100000
+		cache_dir rock /ssd3 ... max-size=99999
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_store_dir_select_algorithm">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_store_dir_select_algorithm">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>
