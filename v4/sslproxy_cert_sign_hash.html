@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: sslproxy_cert_sign_hash</title>
+    <meta name="keywords" content="squid squid.conf config configure sslproxy_cert_sign_hash" />
+    <meta name="description" content="Squid 4.17  sslproxy_cert_sign_hash " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_sslproxy_cert_sign_hash">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_sslproxy_cert_sign_hash">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="sslproxy_cert_sign_hash">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="sslproxy_cert_sign_hash">sslproxy_cert_sign_hash</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--with-openssl</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">none
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Sets the hashing algorithm to use when signing generated certificates.
+	Valid algorithm names depend on the OpenSSL library used. The following
+	names are usually available: sha1, sha256, sha512, and md5. Please see
+	your OpenSSL library manual for the available hashes. By default, Squids
+	that support this option use sha256 hashes.
+
+	Squid does not forcefully purge cached certificates that were generated
+	with an algorithm other than the currently configured one. They remain
+	in the cache, subject to the regular cache eviction policy, and become
+	useful if the algorithm changes again.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_sslproxy_cert_sign_hash">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_sslproxy_cert_sign_hash">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

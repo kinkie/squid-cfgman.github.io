@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2023 The Squid Software Foundation and contributors">
+    <title>Squid 5.9 Configuration File: url_rewrite_timeout</title>
+    <meta name="keywords" content="squid squid.conf config configure url_rewrite_timeout" />
+    <meta name="description" content="Squid 5.9  url_rewrite_timeout " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_url_rewrite_timeout">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_url_rewrite_timeout">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="url_rewrite_timeout">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="url_rewrite_timeout">url_rewrite_timeout</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">Squid waits for the helper response forever
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Squid times active requests to redirector. The timeout value and Squid
+	reaction to a timed out request are configurable using the following
+	format:
+
+	url_rewrite_timeout timeout time-units on_timeout=&lt;action&gt; [response=&lt;quoted-response&gt;]
+
+	supported timeout actions:
+		fail	Squid return a ERR_GATEWAY_FAILURE error page
+
+		bypass	Do not re-write the URL
+
+		retry	Send the lookup to the helper again
+
+		use_configured_response
+			Use the &lt;quoted-response&gt; as helper response
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_url_rewrite_timeout">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_url_rewrite_timeout">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

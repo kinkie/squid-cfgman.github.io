@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: clientside_tos</title>
+    <meta name="keywords" content="squid squid.conf config configure clientside_tos" />
+    <meta name="description" content="Squid 4.17  clientside_tos " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_clientside_tos">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_clientside_tos">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="clientside_tos">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="clientside_tos">clientside_tos</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">none
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Allows you to select a TOS/DSCP value for packets being transmitted
+	on the client-side, based on an ACL.
+
+	clientside_tos ds-field [!]aclname ...
+
+	Example where normal_service_net uses the TOS value 0x00
+	and good_service_net uses 0x20
+
+	acl normal_service_net src 10.0.0.0/24
+	acl good_service_net src 10.0.1.0/24
+	clientside_tos 0x00 normal_service_net
+	clientside_tos 0x20 good_service_net
+
+	Note: This feature is incompatible with qos_flows. Any TOS values set here
+	will be overwritten by TOS values in qos_flows.
+
+	The TOS/DSCP byte must be exactly that - a octet value  0 - 255, or
+	"default" to use whatever default your host has.
+	Note that only multiples of 4 are usable as the two rightmost bits have
+	been redefined for use by ECN (RFC 3168 section 23.1).
+	The squid parser will enforce this by masking away the ECN bits.
+
+	This clause only supports fast acl types.
+	See http://wiki.squid-cache.org/SquidFaq/SquidAcl for details.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_clientside_tos">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_clientside_tos">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

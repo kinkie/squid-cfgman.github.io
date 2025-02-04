@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: adaptation_service_set</title>
+    <meta name="keywords" content="squid squid.conf config configure adaptation_service_set" />
+    <meta name="description" content="Squid 4.17  adaptation_service_set " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_adaptation_service_set">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_adaptation_service_set">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="adaptation_service_set">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="adaptation_service_set">adaptation_service_set</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--enable-ecap or --enable-icap-client</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">none
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+
+	Configures an ordered set of similar, redundant services. This is
+	useful when hot standby or backup adaptation servers are available.
+
+	    adaptation_service_set set_name service_name1 service_name2 ...
+
+ 	The named services are used in the set declaration order. The first
+	applicable adaptation service from the set is used first. The next
+	applicable service is tried if and only if the transaction with the
+	previous service fails and the message waiting to be adapted is still
+	intact.
+
+	When adaptation starts, broken services are ignored as if they were
+	not a part of the set. A broken service is a down optional service.
+
+	The services in a set must be attached to the same vectoring point
+	(e.g., pre-cache) and use the same adaptation method (e.g., REQMOD).
+
+	If all services in a set are optional then adaptation failures are
+	bypassable. If all services in the set are essential, then a
+	transaction failure with one service may still be retried using
+	another service from the set, but when all services fail, the master
+	transaction fails as well.
+
+	A set may contain a mix of optional and essential services, but that
+	is likely to lead to surprising results because broken services become
+	ignored (see above), making previously bypassable failures fatal.
+	Technically, it is the bypassability of the last failed service that
+	matters.
+
+	See also: adaptation_access adaptation_service_chain
+
+Example:
+adaptation_service_set svcBlocker urlFilterPrimary urlFilterBackup
+adaptation service_set svcLogger loggerLocal loggerRemote
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_adaptation_service_set">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_adaptation_service_set">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

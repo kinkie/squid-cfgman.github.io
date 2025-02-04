@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: auth_param</title>
+    <meta name="keywords" content="squid squid.conf config configure auth_param" />
+    <meta name="description" content="Squid 4.17  auth_param " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_auth_param">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_auth_param">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="auth_param">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="auth_param">auth_param</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--enable-auth</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">none
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+#auth_param negotiate program &lt;uncomment and complete this line to activate&gt;
+#auth_param negotiate children 20 startup=0 idle=1
+#auth_param negotiate keep_alive on
+#
+#auth_param digest program &lt;uncomment and complete this line to activate&gt;
+#auth_param digest children 20 startup=0 idle=1
+#auth_param digest realm Squid proxy-caching web server
+#auth_param digest nonce_garbage_interval 5 minutes
+#auth_param digest nonce_max_duration 30 minutes
+#auth_param digest nonce_max_count 50
+#
+#auth_param ntlm program &lt;uncomment and complete this line to activate&gt;
+#auth_param ntlm children 20 startup=0 idle=1
+#auth_param ntlm keep_alive on
+#
+#auth_param basic program &lt;uncomment and complete this line&gt;
+#auth_param basic children 5 startup=5 idle=1
+#auth_param basic realm Squid proxy-caching web server
+#auth_param basic credentialsttl 2 hours
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	This is used to define parameters for the various authentication
+	schemes supported by Squid.
+
+		format: auth_param scheme parameter [setting]
+
+	The order in which authentication schemes are presented to the client is
+	dependent on the order the scheme first appears in config file. IE
+	has a bug (it's not RFC 2617 compliant) in that it will use the basic
+	scheme if basic is the first entry presented, even if more secure
+	schemes are presented. For now use the order in the recommended
+	settings section below. If other browsers have difficulties (don't
+	recognize the schemes offered even if you are using basic) either
+	put basic first, or disable the other schemes (by commenting out their
+	program entry).
+
+	Once an authentication scheme is fully configured, it can only be
+	shutdown by shutting squid down and restarting. Changes can be made on
+	the fly and activated with a reconfigure. I.E. You can change to a
+	different helper, but not unconfigure the helper completely.
+
+	Please note that while this directive defines how Squid processes
+	authentication it does not automatically activate authentication.
+	To use authentication you must in addition make use of ACLs based
+	on login name in http_access (proxy_auth, proxy_auth_regex or
+	external with %LOGIN used in the format tag). The browser will be
+	challenged for authentication on the first such acl encountered
+	in http_access processing and will also be re-challenged for new
+	login credentials if the request is being denied by a proxy_auth
+	type acl.
+
+	WARNING: authentication can't be used in a transparently intercepting
+	proxy as the client then thinks it is talking to an origin server and
+	not the proxy. This is a limitation of bending the TCP/IP protocol to
+	transparently intercepting port 80, not a limitation in Squid.
+	Ports flagged 'transparent', 'intercept', or 'tproxy' have
+	authentication disabled.
+
+	=== Parameters common to all schemes. ===
+
+	"program" cmdline
+		Specifies the command for the external authenticator.
+
+		By default, each authentication scheme is not used unless a
+		program is specified.
+
+		See http://wiki.squid-cache.org/Features/AddonHelpers for
+		more details on helper operations and creating your own.
+
+	"key_extras" format
+		Specifies a string to be append to request line format for
+		the authentication helper. "Quoted" format values may contain
+		spaces and logformat %macros. In theory, any logformat %macro
+		can be used. In practice, a %macro expands as a dash (-) if
+		the helper request is sent before the required macro
+		information is available to Squid.
+
+		By default, Squid uses request formats provided in
+		scheme-specific examples below (search for %credentials).
+
+		The expanded key_extras value is added to the Squid credentials
+		cache and, hence, will affect authentication. It can be used to
+		autenticate different users with identical user names (e.g.,
+		when user authentication depends on http_port).
+
+		Avoid adding frequently changing information to key_extras. For
+		example, if you add user source IP, and it changes frequently
+		in your environment, then max_user_ip ACL is going to treat
+		every user+IP combination as a unique "user", breaking the ACL
+		and wasting a lot of memory on those user records. It will also
+		force users to authenticate from scratch whenever their IP
+		changes.
+
+	"realm" string
+		Specifies the protection scope (aka realm name) which is to be
+		reported to the client for the authentication scheme. It is
+		commonly part of the text the user will see when prompted for
+		their username and password.
+
+		For Basic the default is "Squid proxy-caching web server".
+		For Digest there is no default, this parameter is mandatory.
+		For NTLM and Negotiate this parameter is ignored.
+
+	"children" numberofchildren [startup=N] [idle=N] [concurrency=N]
+		[queue-size=N] [on-persistent-overload=action]
+
+		The maximum number of authenticator processes to spawn. If
+		you start too few Squid will have to wait for them to process
+		a backlog of credential verifications, slowing it down. When
+		password verifications are done via a (slow) network you are
+		likely to need lots of authenticator processes.
+
+		The startup= and idle= options permit some skew in the exact
+		amount run. A minimum of startup=N will begin during startup
+		and reconfigure. Squid will start more in groups of up to
+		idle=N in an attempt to meet traffic needs and to keep idle=N
+		free above those traffic needs up to the maximum.
+
+		The concurrency= option sets the number of concurrent requests
+		the helper can process.  The default of 0 is used for helpers
+		who only supports one request at a time. Setting this to a
+		number greater than 0 changes the protocol used to include a
+		channel ID field first on the request/response line, allowing
+		multiple requests to be sent to the same helper in parallel
+		without waiting for the response.
+
+		Concurrency must not be set unless it's known the helper
+		supports the input format with channel-ID fields.
+
+		The queue-size option sets the maximum number of queued
+		requests. A request is queued when no existing child can
+		accept it due to concurrency limit and no new child can be
+		started due to numberofchildren limit. The default maximum is
+		2*numberofchildren. Squid is allowed to temporarily exceed the
+		configured maximum, marking the affected helper as
+		"overloaded". If the helper overload lasts more than 3
+		minutes, the action prescribed by the on-persistent-overload
+		option applies.
+
+		The on-persistent-overload=action option specifies Squid
+		reaction to a new helper request arriving when the helper
+		has been overloaded for more that 3 minutes already. The number
+		of queued requests determines whether the helper is overloaded
+		(see the queue-size option).
+
+		Two actions are supported:
+
+		  die	Squid worker quits. This is the default behavior.
+
+		  ERR	Squid treats the helper request as if it was
+			immediately submitted, and the helper immediately
+			replied with an ERR response. This action has no effect
+			on the already queued and in-progress helper requests.
+
+		NOTE: NTLM and Negotiate schemes do not support concurrency
+			in the Squid code module even though some helpers can.
+
+
+IF HAVE_AUTH_MODULE_BASIC
+	=== Basic authentication parameters ===
+
+	"utf8" on|off
+		HTTP uses iso-latin-1 as character set, while some
+		authentication backends such as LDAP expects UTF-8. If this is
+		set to on Squid will translate the HTTP iso-latin-1 charset to
+		UTF-8 before sending the username and password to the helper.
+
+	"credentialsttl" timetolive
+		Specifies how long squid assumes an externally validated
+		username:password pair is valid for - in other words how
+		often the helper program is called for that user. Set this
+		low to force revalidation with short lived passwords.
+
+		NOTE: setting this high does not impact your susceptibility
+		to replay attacks unless you are using an one-time password
+		system (such as SecureID). If you are using such a system,
+		you will be vulnerable to replay attacks unless you also
+		use the max_user_ip ACL in an http_access rule.
+
+	"casesensitive" on|off
+		Specifies if usernames are case sensitive. Most user databases
+		are case insensitive allowing the same username to be spelled
+		using both lower and upper case letters, but some are case
+		sensitive. This makes a big difference for user_max_ip ACL
+		processing and similar.
+
+ENDIF
+IF HAVE_AUTH_MODULE_DIGEST
+	=== Digest authentication parameters ===
+
+	"utf8" on|off
+		HTTP uses iso-latin-1 as character set, while some
+		authentication backends such as LDAP expects UTF-8. If this is
+		set to on Squid will translate the HTTP iso-latin-1 charset to
+		UTF-8 before sending the username and password to the helper.
+
+	"nonce_garbage_interval" timeinterval
+		Specifies the interval that nonces that have been issued
+		to client_agent's are checked for validity.
+
+	"nonce_max_duration" timeinterval
+		Specifies the maximum length of time a given nonce will be
+		valid for.
+
+	"nonce_max_count" number
+		Specifies the maximum number of times a given nonce can be
+		used.
+
+	"nonce_strictness" on|off
+		Determines if squid requires strict increment-by-1 behavior
+		for nonce counts, or just incrementing (off - for use when
+		user agents generate nonce counts that occasionally miss 1
+		(ie, 1,2,4,6)). Default off.
+
+	"check_nonce_count" on|off
+		This directive if set to off can disable the nonce count check
+		completely to work around buggy digest qop implementations in
+		certain mainstream browser versions. Default on to check the
+		nonce count to protect from authentication replay attacks.
+
+	"post_workaround" on|off
+		This is a workaround to certain buggy browsers who send an
+		incorrect request digest in POST requests when reusing the
+		same nonce as acquired earlier on a GET request.
+
+ENDIF
+IF HAVE_AUTH_MODULE_NEGOTIATE
+	=== Negotiate authentication parameters ===
+
+	"keep_alive" on|off
+		If you experience problems with PUT/POST requests when using
+		the this authentication scheme then you can try setting this
+		to off. This will cause Squid to forcibly close the connection
+		on the initial request where the browser asks which schemes
+		are supported by the proxy.
+
+ENDIF
+IF HAVE_AUTH_MODULE_NTLM
+	=== NTLM authentication parameters ===
+
+	"keep_alive" on|off
+		If you experience problems with PUT/POST requests when using
+		the this authentication scheme then you can try setting this
+		to off. This will cause Squid to forcibly close the connection
+		on the initial request where the browser asks which schemes
+		are supported by the proxy.
+ENDIF
+
+	=== Example Configuration ===
+
+	This configuration displays the recommended authentication scheme
+	order from most to least secure with recommended minimum configuration
+	settings for each scheme:
+
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_auth_param">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_auth_param">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

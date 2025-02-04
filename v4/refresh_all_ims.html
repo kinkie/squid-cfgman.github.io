@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: refresh_all_ims</title>
+    <meta name="keywords" content="squid squid.conf config configure refresh_all_ims" />
+    <meta name="description" content="Squid 4.17  refresh_all_ims " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_refresh_all_ims">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_refresh_all_ims">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="refresh_all_ims">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="refresh_all_ims">refresh_all_ims</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">refresh_all_ims off
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	When you enable this option, squid will always check
+	the origin server for an update when a client sends an
+	If-Modified-Since request.  Many browsers use IMS
+	requests when the user requests a reload, and this
+	ensures those clients receive the latest version.
+
+	By default (off), squid may return a Not Modified response
+	based on the age of the cached version.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_refresh_all_ims">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_refresh_all_ims">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

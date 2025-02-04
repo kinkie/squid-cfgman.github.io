@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: store_miss</title>
+    <meta name="keywords" content="squid squid.conf config configure store_miss" />
+    <meta name="description" content="Squid 4.17  store_miss " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_store_miss">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_store_miss">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="store_miss">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="store_miss">store_miss</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">By default, this directive is unused and has no effect.
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Responses denied by this directive will not be cached (but may still
+	be served from the cache, see send_hit). This directive has no
+	effect on the responses it allows and on the already cached responses.
+
+	Please see the "cache" directive for a summary of differences among
+	store_miss, send_hit, and cache directives. See the
+	send_hit directive for a usage example.
+
+	Unlike the "cache" directive, store_miss only supports fast acl
+	types.  See http://wiki.squid-cache.org/SquidFaq/SquidAcl for details.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_store_miss">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_store_miss">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: client_dst_passthru</title>
+    <meta name="keywords" content="squid squid.conf config configure client_dst_passthru" />
+    <meta name="description" content="Squid 4.17  client_dst_passthru " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_client_dst_passthru">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_client_dst_passthru">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="client_dst_passthru">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="client_dst_passthru">client_dst_passthru</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">client_dst_passthru on
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	With NAT or TPROXY intercepted traffic Squid may pass the request
+	directly to the original client destination IP or seek a faster
+	source using the HTTP Host header.
+	
+	Using Host to locate alternative servers can provide faster
+	connectivity with a range of failure recovery options.
+	But can also lead to connectivity trouble when the client and
+	server are attempting stateful interactions unaware of the proxy.
+	
+	This option (on by default) prevents alternative DNS entries being
+	located to send intercepted traffic DIRECT to an origin server.
+	The clients original destination IP and port will be used instead.
+	
+	Regardless of this option setting, when dealing with intercepted
+	traffic Squid will verify the Host: header and any traffic which
+	fails Host verification will be treated as if this option were ON.
+	
+	see host_verify_strict for details on the verification process.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_client_dst_passthru">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_client_dst_passthru">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

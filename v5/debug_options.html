@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2023 The Squid Software Foundation and contributors">
+    <title>Squid 5.9 Configuration File: debug_options</title>
+    <meta name="keywords" content="squid squid.conf config configure debug_options" />
+    <meta name="description" content="Squid 5.9  debug_options " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_debug_options">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_debug_options">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="debug_options">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="debug_options">debug_options</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">Log all critical and important messages.
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Logging options are set as section,level where each source file
+	is assigned a unique section.  Lower levels result in less
+	output,  Full debugging (level 9) can result in a very large
+	log file, so be careful.
+
+	The magic word "ALL" sets debugging levels for all sections.
+	The default is to run with "ALL,1" to record important warnings.
+
+	The rotate=N option can be used to keep more or less of these logs
+	than would otherwise be kept by logfile_rotate.
+	For most uses a single log should be enough to monitor current
+	events affecting Squid.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_debug_options">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_debug_options">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

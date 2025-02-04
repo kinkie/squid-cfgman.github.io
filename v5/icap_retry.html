@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2023 The Squid Software Foundation and contributors">
+    <title>Squid 5.9 Configuration File: icap_retry</title>
+    <meta name="keywords" content="squid squid.conf config configure icap_retry" />
+    <meta name="description" content="Squid 5.9  icap_retry " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_icap_retry">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_icap_retry">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="icap_retry">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="icap_retry">icap_retry</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--enable-icap-client</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">deny all
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	This ACL determines which retriable ICAP transactions are
+	retried. Transactions that received a complete ICAP response
+	and did not have to consume or produce HTTP bodies to receive
+	that response are usually retriable.
+
+	icap_retry allow|deny [!]aclname ...
+
+	Squid automatically retries some ICAP I/O timeouts and errors
+	due to persistent connection race conditions.
+
+	See also: icap_retry_limit
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_icap_retry">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_icap_retry">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

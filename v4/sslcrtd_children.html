@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: sslcrtd_children</title>
+    <meta name="keywords" content="squid squid.conf config configure sslcrtd_children" />
+    <meta name="description" content="Squid 4.17  sslcrtd_children " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_sslcrtd_children">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_sslcrtd_children">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="sslcrtd_children">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="sslcrtd_children">sslcrtd_children</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--enable-ssl-crtd</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">sslcrtd_children 32 startup=5 idle=1
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Specifies the maximum number of certificate generation processes that
+	Squid may spawn (numberofchildren) and several related options. Using
+	too few of these helper processes (a.k.a. "helpers") creates request
+	queues. Using too many helpers wastes your system resources. Squid
+	does not support spawning more than 32 helpers.
+
+	Usage: numberofchildren [option]...
+
+	The startup= and idle= options allow some measure of skew in your
+	tuning.
+	
+		startup=N
+	
+	Sets the minimum number of processes to spawn when Squid
+	starts or reconfigures. When set to zero the first request will
+	cause spawning of the first child process to handle it.
+	
+	Starting too few children temporary slows Squid under load while it
+	tries to spawn enough additional processes to cope with traffic.
+	
+		idle=N
+	
+	Sets a minimum of how many processes Squid is to try and keep available
+	at all times. When traffic begins to rise above what the existing
+	processes can handle this many more will be spawned up to the maximum
+	configured. A minimum setting of 1 is required.
+
+		queue-size=N
+
+	Sets the maximum number of queued requests. A request is queued when
+	no existing child is idle and no new child can be started due to
+	numberofchildren limit. If the queued requests exceed queue size for
+	more than 3 minutes squid aborts its operation. The default value is
+	set to 2*numberofchildren.
+	
+	You must have at least one ssl_crtd process.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_sslcrtd_children">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_sslcrtd_children">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

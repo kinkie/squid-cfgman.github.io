@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2023 The Squid Software Foundation and contributors">
+    <title>Squid 5.9 Configuration File: store_id_extras</title>
+    <meta name="keywords" content="squid squid.conf config configure store_id_extras" />
+    <meta name="description" content="Squid 5.9  store_id_extras " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_store_id_extras">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_store_id_extras">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="store_id_extras">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="store_id_extras">store_id_extras</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">store_id_extras "%&gt;a/%&gt;A %un %&gt;rm myip=%la myport=%lp"
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+        Specifies a string to be append to request line format for the
+        StoreId helper. "Quoted" format values may contain spaces and
+        logformat %macros. In theory, any logformat %macro can be used.
+        In practice, a %macro expands as a dash (-) if the helper request is
+        sent before the required macro information is available to Squid.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_store_id_extras">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_store_id_extras">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

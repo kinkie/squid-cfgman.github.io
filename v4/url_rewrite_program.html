@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: url_rewrite_program</title>
+    <meta name="keywords" content="squid squid.conf config configure url_rewrite_program" />
+    <meta name="description" content="Squid 4.17  url_rewrite_program " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_url_rewrite_program">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_url_rewrite_program">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="url_rewrite_program">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="url_rewrite_program">url_rewrite_program</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias">redirect_program</td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">none
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	The name and command line parameters of an admin-provided executable
+	for redirecting clients or adjusting/replacing client request URLs.
+
+	This helper is consulted after the received request is cleared by
+	http_access and adapted using eICAP/ICAP services (if any). If the
+	helper does not redirect the client, Squid checks adapted_http_access
+	and may consult the cache or forward the request to the next hop.
+
+
+	For each request, the helper gets one line in the following format:
+
+	  [channel-ID &lt;SP&gt;] request-URL [&lt;SP&gt; extras] &lt;NL&gt;
+
+	Use url_rewrite_extras to configure what Squid sends as 'extras'.
+
+
+	The helper must reply to each query using a single line:
+
+	  [channel-ID &lt;SP&gt;] result [&lt;SP&gt; kv-pairs] &lt;NL&gt;
+
+	The result section must match exactly one of the following outcomes:
+
+	  OK [status=30N] url="..."
+
+		Redirect the client to a URL supplied in the 'url' parameter.
+		Optional 'status' specifies the status code to send to the
+		client in Squid's HTTP redirect response. It must be one of
+		the standard HTTP redirect status codes: 301, 302, 303, 307,
+		or 308. When no specific status is requested, Squid uses 302.
+
+	  OK rewrite-url="..."
+
+		Replace the current request URL with the one supplied in the
+		'rewrite-url' parameter. Squid fetches the resource specified
+		by the new URL and forwards the received response (or its
+		cached copy) to the client.
+
+		WARNING: Avoid rewriting URLs! When possible, redirect the
+		client using an "OK url=..." helper response instead.
+		Rewriting URLs may create inconsistent requests and/or break
+		synchronization between internal client and origin server
+		states, especially when URLs or other message parts contain
+		snippets of that state. For example, Squid does not adjust
+		Location headers and embedded URLs after the helper rewrites
+		the request URL.
+
+	  OK
+		Keep the client request intact.
+
+	  ERR
+		Keep the client request intact.
+
+	  BH [message="..."]
+		A helper problem that should be reported to the Squid admin
+		via a level-1 cache.log message. The 'message' parameter is
+		reserved for specifying the log message.
+
+	In addition to the kv-pairs mentioned above, Squid also understands
+	the following optional kv-pairs in URL rewriter responses:
+
+	  clt_conn_tag=TAG
+		Associates a TAG with the client TCP connection.
+
+		The clt_conn_tag=TAG pair is treated as a regular transaction
+		annotation for the current request and also annotates future
+		requests on the same client connection. A helper may update
+		the TAG during subsequent requests by returning a new kv-pair.
+
+
+	Helper messages contain the channel-ID part if and only if the
+	url_rewrite_children directive specifies positive concurrency. As a
+	channel-ID value, Squid sends a number between 0 and concurrency-1.
+	The helper must echo back the received channel-ID in its response.
+
+	By default, Squid does not use a URL rewriter.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_url_rewrite_program">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_url_rewrite_program">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

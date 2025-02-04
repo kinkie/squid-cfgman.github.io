@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: pconn_lifetime</title>
+    <meta name="keywords" content="squid squid.conf config configure pconn_lifetime" />
+    <meta name="description" content="Squid 4.17  pconn_lifetime " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_pconn_lifetime">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_pconn_lifetime">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="pconn_lifetime">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="pconn_lifetime">pconn_lifetime</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">pconn_lifetime 0 seconds
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Desired maximum lifetime of a persistent connection.
+	When set, Squid will close a now-idle persistent connection that
+	exceeded configured lifetime instead of moving the connection into
+	the idle connection pool (or equivalent). No effect on ongoing/active
+	transactions. Connection lifetime is the time period from the
+	connection acceptance or opening time until "now".
+	
+	This limit is useful in environments with long-lived connections
+	where Squid configuration or environmental factors change during a
+	single connection lifetime. If unrestricted, some connections may
+	last for hours and even days, ignoring those changes that should
+	have affected their behavior or their existence.
+	
+	Currently, a new lifetime value supplied via Squid reconfiguration
+	has no effect on already idle connections unless they become busy.
+	
+	When set to '0' this limit is not used.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_pconn_lifetime">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_pconn_lifetime">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: ftp_eprt</title>
+    <meta name="keywords" content="squid squid.conf config configure ftp_eprt" />
+    <meta name="description" content="Squid 4.17  ftp_eprt " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_ftp_eprt">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_ftp_eprt">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="ftp_eprt">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="ftp_eprt">ftp_eprt</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">ftp_eprt on
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	FTP Protocol extensions permit the use of a special "EPRT" command.
+
+	This extension provides a protocol neutral alternative to the
+	IPv4-only PORT command. When supported it enables active FTP data
+	channels over IPv6 and efficient NAT handling.
+
+	Turning this OFF will prevent EPRT being attempted and will skip
+	straight to using PORT for IPv4 servers.
+
+	Some devices are known to not handle this extension correctly and
+	may result in crashes. Devices which suport EPRT enough to fail
+	cleanly will result in Squid attempting PORT anyway. This directive
+	should only be disabled when EPRT results in device failures.
+
+	WARNING: Doing so will convert Squid back to the old behavior with all
+	the related problems with external NAT devices/layers and IPv4-only FTP.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_ftp_eprt">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_ftp_eprt">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

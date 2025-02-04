@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: adaptation_masterx_shared_names</title>
+    <meta name="keywords" content="squid squid.conf config configure adaptation_masterx_shared_names" />
+    <meta name="description" content="Squid 4.17  adaptation_masterx_shared_names " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_adaptation_masterx_shared_names">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_adaptation_masterx_shared_names">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="adaptation_masterx_shared_names">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="adaptation_masterx_shared_names">adaptation_masterx_shared_names</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--enable-ecap or --enable-icap-client</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">none
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+# share authentication information among ICAP services
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	For each master transaction (i.e., the HTTP request and response
+	sequence, including all related ICAP and eCAP exchanges), Squid
+	maintains a table of metadata. The table entries are (name, value)
+	pairs shared among eCAP and ICAP exchanges. The table is destroyed
+	with the master transaction.
+
+	This option specifies the table entry names that Squid must accept
+	from and forward to the adaptation transactions.
+
+	An ICAP REQMOD or RESPMOD transaction may set an entry in the 
+	shared table by returning an ICAP header field with a name 
+	specified in adaptation_masterx_shared_names.
+
+	An eCAP REQMOD or RESPMOD transaction may set an entry in the
+	shared table by implementing the libecap::visitEachOption() API
+	to provide an option with a name specified in
+	adaptation_masterx_shared_names.
+
+	Squid will store and forward the set entry to subsequent adaptation
+	transactions within the same master transaction scope.
+
+	Only one shared entry name is supported at this time.
+
+Example:
+adaptation_masterx_shared_names X-Subscriber-ID
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_adaptation_masterx_shared_names">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_adaptation_masterx_shared_names">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

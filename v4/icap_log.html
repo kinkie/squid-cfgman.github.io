@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: icap_log</title>
+    <meta name="keywords" content="squid squid.conf config configure icap_log" />
+    <meta name="description" content="Squid 4.17  icap_log " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_icap_log">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_icap_log">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="icap_log">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="icap_log">icap_log</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--enable-icap-client</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">none
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	ICAP log files record ICAP transaction summaries, one line per
+	transaction.
+
+	The icap_log option format is:
+	icap_log &lt;filepath&gt; [&lt;logformat name&gt; [acl acl ...]]
+	icap_log none [acl acl ...]]
+	
+	Please see access_log option documentation for details. The two
+	kinds of logs share the overall configuration approach and many
+	features.
+
+	ICAP processing of a single HTTP message or transaction may
+	require multiple ICAP transactions.  In such cases, multiple
+	ICAP transaction log lines will correspond to a single access
+	log line.
+
+	ICAP log supports many access.log logformat %codes. In ICAP context,
+	HTTP message-related %codes are applied to the HTTP message embedded
+	in an ICAP message. Logformat "%http::&gt;..." codes are used for HTTP
+	messages embedded in ICAP requests while "%http::&lt;..." codes are used
+	for HTTP messages embedded in ICAP responses. For example:
+
+		http::&gt;h	To-be-adapted HTTP message headers sent by Squid to
+				the ICAP service. For REQMOD transactions, these are
+				HTTP request headers. For RESPMOD, these are HTTP
+				response headers, but Squid currently cannot log them
+				(i.e., %http::&gt;h will expand to "-" for RESPMOD).
+
+		http::&lt;h	Adapted HTTP message headers sent by the ICAP
+				service to Squid (i.e., HTTP request headers in regular
+				REQMOD; HTTP response headers in RESPMOD and during
+				request satisfaction in REQMOD).
+
+	ICAP OPTIONS transactions do not embed HTTP messages.
+
+	Several logformat codes below deal with ICAP message bodies. An ICAP
+	message body, if any, typically includes a complete HTTP message
+	(required HTTP headers plus optional HTTP message body). When
+	computing HTTP message body size for these logformat codes, Squid
+	either includes or excludes chunked encoding overheads; see
+	code-specific documentation for details.
+
+	For Secure ICAP services, all size-related information is currently
+	computed before/after TLS encryption/decryption, as if TLS was not
+	in use at all.
+
+	The following format codes are also available for ICAP logs:
+
+		icap::&lt;A	ICAP server IP address. Similar to &lt;A.
+
+		icap::&lt;service_name	ICAP service name from the icap_service
+				option in Squid configuration file.
+
+		icap::ru	ICAP Request-URI. Similar to ru.
+
+		icap::rm	ICAP request method (REQMOD, RESPMOD, or 
+				OPTIONS). Similar to existing rm.
+
+		icap::&gt;st	The total size of the ICAP request sent to the ICAP
+				server (ICAP headers + ICAP body), including chunking
+				metadata (if any).
+
+		icap::&lt;st	The total size of the ICAP response received from the
+				ICAP server (ICAP headers + ICAP body), including
+				chunking metadata (if any).
+
+		icap::&lt;bs	The size of the ICAP response body received from the
+				ICAP server, excluding chunking metadata (if any).
+
+		icap::tr 	Transaction response time (in
+				milliseconds).  The timer starts when
+				the ICAP transaction is created and
+				stops when the transaction is completed.
+				Similar to tr.
+
+		icap::tio	Transaction I/O time (in milliseconds). The
+				timer starts when the first ICAP request
+				byte is scheduled for sending. The timers
+				stops when the last byte of the ICAP response
+				is received.
+
+		icap::to 	Transaction outcome: ICAP_ERR* for all
+				transaction errors, ICAP_OPT for OPTION
+				transactions, ICAP_ECHO for 204
+				responses, ICAP_MOD for message
+				modification, and ICAP_SAT for request
+				satisfaction. Similar to Ss.
+
+		icap::Hs	ICAP response status code. Similar to Hs.
+
+		icap::&gt;h	ICAP request header(s). Similar to &gt;h.
+
+		icap::&lt;h	ICAP response header(s). Similar to &lt;h.
+
+	The default ICAP log format, which can be used without an explicit
+	definition, is called icap_squid:
+
+logformat icap_squid %ts.%03tu %6icap::tr %&gt;A %icap::to/%03icap::Hs %icap::&lt;st %icap::rm %icap::ru %un -/%icap::&lt;A -
+
+	See also: logformat and %adapt::&lt;last_h
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_icap_log">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_icap_log">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

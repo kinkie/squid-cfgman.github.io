@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: ssl_bump</title>
+    <meta name="keywords" content="squid squid.conf config configure ssl_bump" />
+    <meta name="description" content="Squid 4.17  ssl_bump " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_ssl_bump">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_ssl_bump">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="ssl_bump">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="ssl_bump">ssl_bump</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires">--with-openssl</td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">Become a TCP tunnel without decrypting proxied traffic.
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	This option is consulted when a CONNECT request is received on
+	an http_port (or a new connection is intercepted at an
+	https_port), provided that port was configured with an ssl-bump
+	flag. The subsequent data on the connection is either treated as
+	HTTPS and decrypted OR tunneled at TCP level without decryption,
+	depending on the first matching bumping "action".
+
+	ssl_bump &lt;action&gt; [!]acl ...
+
+	The following bumping actions are currently supported:
+
+	    splice
+		Become a TCP tunnel without decrypting proxied traffic.
+		This is the default action.
+
+	    bump
+		When used on step SslBump1, establishes a secure connection
+		with the client first, then connect to the server.
+		When used on step SslBump2 or SslBump3, establishes a secure
+		connection with the server and, using a mimicked server
+		certificate, with the client.
+
+	    peek
+		Receive client (step SslBump1) or server (step SslBump2)
+		certificate while preserving the possibility of splicing the
+		connection. Peeking at the server certificate (during step 2)
+		usually precludes bumping of the connection at step 3.
+
+	    stare
+		Receive client (step SslBump1) or server (step SslBump2)
+		certificate while preserving the possibility of bumping the
+		connection. Staring at the server certificate (during step 2)
+		usually precludes splicing of the connection at step 3.
+
+	    terminate
+		Close client and server connections.
+
+	Backward compatibility actions available at step SslBump1:
+
+	    client-first
+		Bump the connection. Establish a secure connection with the
+		client first, then connect to the server. This old mode does
+		not allow Squid to mimic server SSL certificate and does not
+		work with intercepted SSL connections.
+
+	    server-first
+		Bump the connection. Establish a secure connection with the
+		server first, then establish a secure connection with the
+		client, using a mimicked server certificate. Works with both
+		CONNECT requests and intercepted SSL connections, but does
+		not allow to make decisions based on SSL handshake info.
+
+	    peek-and-splice
+		Decide whether to bump or splice the connection based on 
+		client-to-squid and server-to-squid SSL hello messages.
+		XXX: Remove.
+
+	    none
+		Same as the "splice" action.
+
+	All ssl_bump rules are evaluated at each of the supported bumping
+	steps.  Rules with actions that are impossible at the current step are
+	ignored. The first matching ssl_bump action wins and is applied at the
+	end of the current step. If no rules match, the splice action is used.
+	See the at_step ACL for a list of the supported SslBump steps.
+
+	This clause supports both fast and slow acl types.
+	See http://wiki.squid-cache.org/SquidFaq/SquidAcl for details.
+
+	See also: http_port ssl-bump, https_port ssl-bump, and acl at_step.
+
+
+	# Example: Bump all TLS connections except those originating from
+	# localhost or those going to example.com.
+
+	acl broken_sites ssl::server_name .example.com
+	ssl_bump splice localhost
+	ssl_bump splice broken_sites
+	ssl_bump bump all
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_ssl_bump">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_ssl_bump">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: ftp_epsv_all</title>
+    <meta name="keywords" content="squid squid.conf config configure ftp_epsv_all" />
+    <meta name="description" content="Squid 4.17  ftp_epsv_all " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_ftp_epsv_all">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_ftp_epsv_all">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="ftp_epsv_all">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="ftp_epsv_all">ftp_epsv_all</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">ftp_epsv_all off
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	FTP Protocol extensions permit the use of a special "EPSV ALL" command.
+
+	NATs may be able to put the connection on a "fast path" through the
+	translator, as the EPRT command will never be used and therefore,
+	translation of the data portion of the segments will never be needed.
+
+	When a client only expects to do two-way FTP transfers this may be
+	useful.
+	If squid finds that it must do a three-way FTP transfer after issuing
+	an EPSV ALL command, the FTP session will fail.
+
+	If you have any doubts about this option do not use it.
+	Squid will nicely attempt all other connection methods.
+
+	Requires ftp_passive to be ON (default) for any effect.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_ftp_epsv_all">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_ftp_epsv_all">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

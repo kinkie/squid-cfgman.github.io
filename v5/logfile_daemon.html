@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2023 The Squid Software Foundation and contributors">
+    <title>Squid 5.9 Configuration File: logfile_daemon</title>
+    <meta name="keywords" content="squid squid.conf config configure logfile_daemon" />
+    <meta name="description" content="Squid 5.9  logfile_daemon " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_logfile_daemon">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_logfile_daemon">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="logfile_daemon">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="logfile_daemon">logfile_daemon</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">logfile_daemon /usr/local/squid/libexec/log_file_daemon
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Specify the path to the logfile-writing daemon. This daemon is
+	used to write the access and store logs, if configured.
+
+	Squid sends a number of commands to the log daemon:
+	  L&lt;data&gt;\n - logfile data
+	  R\n - rotate file
+	  T\n - truncate file
+	  O\n - reopen file
+	  F\n - flush file
+	  r&lt;n&gt;\n - set rotate count to &lt;n&gt;
+	  b&lt;n&gt;\n - 1 = buffer output, 0 = don't buffer output
+
+	No responses is expected.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_logfile_daemon">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_logfile_daemon">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

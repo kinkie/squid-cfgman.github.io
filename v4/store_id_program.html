@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: store_id_program</title>
+    <meta name="keywords" content="squid squid.conf config configure store_id_program" />
+    <meta name="description" content="Squid 4.17  store_id_program " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_store_id_program">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_store_id_program">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="store_id_program">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="store_id_program">store_id_program</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias">storeurl_rewrite_program</td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">none
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	Specify the location of the executable StoreID helper to use.
+	Since they can perform almost any function there isn't one included.
+
+	For each requested URL, the helper will receive one line with the format
+
+	  [channel-ID &lt;SP&gt;] URL [&lt;SP&gt; extras]&lt;NL&gt;
+
+
+	After processing the request the helper must reply using the following format:
+
+	  [channel-ID &lt;SP&gt;] result [&lt;SP&gt; kv-pairs]
+
+	The result code can be:
+
+	  OK store-id="..."
+		Use the StoreID supplied in 'store-id='.
+
+	  ERR
+		The default is to use HTTP request URL as the store ID.
+
+	  BH
+		An internal error occurred in the helper, preventing
+		a result being identified.
+
+	In addition to the above kv-pairs Squid also understands the following
+	optional kv-pairs received from URL rewriters:
+	  clt_conn_tag=TAG
+		Associates a TAG with the client TCP connection.
+		Please see url_rewrite_program related documentation for this
+		kv-pair
+
+	Helper programs should be prepared to receive and possibly ignore
+	additional whitespace-separated tokens on each input line.
+
+	When using the concurrency= option the protocol is changed by
+	introducing a query channel tag in front of the request/response.
+	The query channel tag is a number between 0 and concurrency-1.
+	This value must be echoed back unchanged to Squid as the first part
+	of the response relating to its request.
+
+	NOTE: when using StoreID refresh_pattern will apply to the StoreID
+	      returned from the helper and not the URL.
+
+	WARNING: Wrong StoreID value returned by a careless helper may result
+	         in the wrong cached response returned to the user.
+
+	By default, a StoreID helper is not used.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_store_id_program">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_store_id_program">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

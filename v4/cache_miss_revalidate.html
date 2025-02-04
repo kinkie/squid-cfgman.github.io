@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: cache_miss_revalidate</title>
+    <meta name="keywords" content="squid squid.conf config configure cache_miss_revalidate" />
+    <meta name="description" content="Squid 4.17  cache_miss_revalidate " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_cache_miss_revalidate">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_cache_miss_revalidate">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="cache_miss_revalidate">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="cache_miss_revalidate">cache_miss_revalidate</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias"></td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">cache_miss_revalidate on
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	RFC 7232 defines a conditional request mechanism to prevent
+	response objects being unnecessarily transferred over the network.
+	If that mechanism is used by the client and a cache MISS occurs
+	it can prevent new cache entries being created.
+
+	This option determines whether Squid on cache MISS will pass the
+	client revalidation request to the server or tries to fetch new
+	content for caching. It can be useful while the cache is mostly
+	empty to more quickly have the cache populated by generating
+	non-conditional GETs.
+
+	When set to 'on' (default), Squid will pass all client If-* headers
+	to the server. This permits server responses without a cacheable
+	payload to be delivered and on MISS no new cache entry is created.
+
+	When set to 'off' and if the request is cacheable, Squid will
+	remove the clients If-Modified-Since and If-None-Match headers from
+	the request sent to the server. This requests a 200 status response
+	from the server to create a new cache entry with.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_cache_miss_revalidate">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_cache_miss_revalidate">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>

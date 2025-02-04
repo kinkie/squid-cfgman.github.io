@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta type="copyright" content="Copyright (C) 1996-2021 The Squid Software Foundation and contributors">
+    <title>Squid 4.17 Configuration File: store_id_bypass</title>
+    <meta name="keywords" content="squid squid.conf config configure store_id_bypass" />
+    <meta name="description" content="Squid 4.17  store_id_bypass " />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/default.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.squid-cache.org/cfgman.css" />
+</head>
+
+<body>
+<div id="content">
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_store_id_bypass">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_store_id_bypass">Alphabetical Index</a>&nbsp;|
+  </p>
+
+  <table class="summary" summary="store_id_bypass">
+    <tr>
+      <th>Option Name:</th><td id="name"><a name="store_id_bypass">store_id_bypass</a></td>
+    </tr>
+    <tr>
+      <th>Replaces:</th><td id="alias">storeurl_rewrite_bypass</td>
+    </tr>
+    <tr>
+      <th>Requires:</th><td id="requires"></td>
+    </tr>
+    <tr>
+      <th>Default Value:</th><td id="default">store_id_bypass on
+</td>
+    </tr>
+    <tr>
+      <th>Suggested Config:</th>
+      <td id="config">
+<pre>
+
+</pre>
+      </td>
+    </tr>
+    <tr>
+      <td id="detail" colspan="2">
+<pre>
+	When this is 'on', a request will not go through the
+	helper if all helpers are busy. If this is 'off' and the helper
+	queue grows too large, the action is prescribed by the
+	on-persistent-overload option. You should only enable this if the
+	helpers are not critical to your caching system. If you use
+	helpers for critical caching components, and you enable this 
+	option,	users may not get objects from cache.
+	This options sets default queue-size option of the store_id_children
+	to 0.
+
+</pre>
+      </td>
+    </tr>
+    <tr class="spacer"><td>&nbsp;</td></tr>
+  </table>
+  <p class="cfglinks">
+  |&nbsp;<a href="index.html#toc_store_id_bypass">Index</a>&nbsp;
+  |&nbsp;<a href="index_all.html#toc_store_id_bypass">Alphabetical Index</a>&nbsp;|
+  </p>
+  </div>
+
+  </body>
+</html>
