@@ -1,6 +1,6 @@
 Documents for version:
 
-{% include pages-list-by-path.html dir=page.dir %}
+{% include subdirs-list-by-path.html dir=page.dir %}
 
 <hr>
-{% include pages-list-by-path.html dir='/' %}
+{% include subdirs-list-by-path.html dir='/' %}
