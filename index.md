@@ -1,4 +1,7 @@
 Documents for version:
 
-{% include subdirs-list-by-path.html dir=page.dir %}
-
+* [v4](v4)
+* [v5](v5)
+* [v6](v6)
+* [v7](v7)
+* [trunk](v8) - eventually to become v8
