@@ -1,12 +1,12 @@
 {%- comment -%}
 arguments:
 -    dir: the prefix in the path of pages to consider
--    numbers: true if you want the list to be numbered
 {%- endcomment -%}
-{%- if include.numbers -%}{%- assign prefix = "1."-%}{%- else -%}{%- assign prefix = "*"-%}{%- endif -%}
-{%- assign pdir = site.pages | where_exp: "p", "p.url contains include.dir" | map: 'dir' | uniq -%}
+{{ site.pages | map: 'url' }}
+{%- assign pdir = site.pages | where_exp: "p", "p.url contains include.dir" | map: 'dir' -%}
+{{ pdir }} 
 {% for p in pdir -%}
-{%- if purl == "" -%}{%- continue -%}{%- endif -%}
 {%- assign pathsuffix = p.url | replace: ".html", "" | split: "/" | last -%}
-{{prefix}} [{{ p.title | default: pathsuffix }}]({{ purl }})
+* [{{ p.title | default: pathsuffix }}]({{ p.url }})
+* {{ p }}: {{ p.title }}: {{ p.url }}
 {% endfor %}
