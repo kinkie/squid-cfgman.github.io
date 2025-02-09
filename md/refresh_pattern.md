@@ -1,0 +1,136 @@
+---
+title: "Squid 3.1.0 configuration directive: refresh_pattern"
+copyright: Copyright (C) 1996-2023 The Squid Software Foundation and contributors
+keywords: squid squid.conf config configure refresh_pattern
+versions: 3.1.0
+proiduct: Squid Web cache
+permissions: GNU GPL v2
+# showMiniToc: true
+---
+[Index](index#toc_refresh_pattern) | [Alphabetical Index](index_all#toc_refresh_pattern)
+
+## Option Name:
+[refresh_pattern](#refresh_pattern)
+ * **Replaces:** 
+ * **Requires:** 
+ * **Default Value:** none
+
+
+## Suggested Config:
+```plaintext
+#
+# Add any of your own refresh_pattern entries above these.
+#
+
+```
+
+## Details:
+
+	usage: refresh_pattern [-i] regex min percent max [options]
+
+	By default, regular expressions are CASE-SENSITIVE.  To make
+	them case-insensitive, use the -i option.
+
+	'Min' is the time (in minutes) an object without an explicit
+	expiry time should be considered fresh. The recommended
+	value is 0, any higher values may cause dynamic applications
+	to be erroneously cached unless the application designer
+	has taken the appropriate actions.
+
+	'Percent' is used to compute the max-age value for responses
+	with a Last-Modified header and no Cache-Control:max-age nor Expires.
+	  Cache-Control:max-age = ( Date - Last-Modified ) * percent
+
+	'Max' is an upper limit on how long objects without an explicit
+	expiry time will be considered fresh. The value is also used
+	to form Cache-Control: max-age header for a request sent from
+	Squid to origin/parent.
+
+	options: override-expire
+		 override-lastmod
+		 reload-into-ims
+		 ignore-reload
+		 ignore-no-store
+		 ignore-private
+		 max-stale=NN
+		 refresh-ims
+		 store-stale
+
+		override-expire enforces min age even if the server
+		sent an explicit expiry time (e.g., with the
+		Expires: header or Cache-Control: max-age). Doing this
+		VIOLATES the HTTP standard.  Enabling this feature
+		could make you liable for problems which it causes.
+
+		Note: override-expire does not enforce staleness - it only extends
+		freshness / min. If the server returns a Expires time which
+		is longer than your max time, Squid will still consider
+		the object fresh for that period of time.
+
+		override-lastmod enforces min age even on objects
+		that were modified recently.
+
+		reload-into-ims changes a client no-cache or ``reload''
+		request for a cached entry into a conditional request using
+		If-Modified-Since and/or If-None-Match headers, provided the
+		cached entry has a Last-Modified and/or a strong ETag header.
+		Doing this VIOLATES the HTTP standard. Enabling this feature
+		could make you liable for problems which it causes.
+
+		ignore-reload ignores a client no-cache or ``reload''
+		header. Doing this VIOLATES the HTTP standard. Enabling
+		this feature could make you liable for problems which
+		it causes.
+
+		ignore-no-store ignores any ``Cache-control: no-store''
+		headers received from a server. Doing this VIOLATES
+		the HTTP standard. Enabling this feature could make you
+		liable for problems which it causes.
+
+		ignore-private ignores any ``Cache-control: private''
+		headers received from a server. Doing this VIOLATES
+		the HTTP standard. Enabling this feature could make you
+		liable for problems which it causes.
+
+		refresh-ims causes squid to contact the origin server
+		when a client issues an If-Modified-Since request. This
+		ensures that the client will receive an updated version
+		if one is available.
+
+		store-stale stores responses even if they don't have explicit
+		freshness or a validator (i.e., Last-Modified or an ETag)
+		present, or if they're already stale. By default, Squid will
+		not cache such responses because they usually can't be
+		reused. Note that such responses will be stale by default.
+
+		max-stale=NN provide a maximum staleness factor. Squid won't
+		serve objects more stale than this even if it failed to
+		validate the object. Default: use the max_stale global limit.
+
+	Basically a cached object is:
+
+		FRESH if expire &gt; now, else STALE
+		STALE if age &gt; max
+		FRESH if lm-factor &lt; percent, else STALE
+		FRESH if age &lt; min
+		else STALE
+
+	The refresh_pattern lines are checked in the order listed here.
+	The first entry which matches is used.  If none of the entries
+	match the default will be used.
+
+	Note, you must uncomment all the default lines if you want
+	to change one. The default setting is only active if none is
+	used.
+
+CONFIG_START
+
+refresh_pattern ^ftp:		1440	20%	10080
+refresh_pattern -i (/cgi-bin/|\?) 0	0%	0
+refresh_pattern .		0	20%	4320
+CONFIG_END
+
+
+
+[Index](index#toc_refresh_pattern) | [Alphabetical Index](index_all#toc_refresh_pattern)
+

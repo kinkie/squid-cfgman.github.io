@@ -1,0 +1,206 @@
+---
+title: "Squid 3.1.0 configuration directive: icap_service"
+copyright: Copyright (C) 1996-2023 The Squid Software Foundation and contributors
+keywords: squid squid.conf config configure icap_service
+versions: 3.1.0
+proiduct: Squid Web cache
+permissions: GNU GPL v2
+# showMiniToc: true
+---
+[Index](index#toc_icap_service) | [Alphabetical Index](index_all#toc_icap_service)
+
+## Option Name:
+[icap_service](#icap_service)
+ * **Replaces:** 
+ * **Requires:** --enable-icap-client
+ * **Default Value:** none
+
+
+## Suggested Config:
+```plaintext
+
+```
+
+## Details:
+
+	Defines a single ICAP service using the following format:
+
+	icap_service id vectoring_point uri [option ...]
+
+	id: ID
+		an opaque identifier or name which is used to direct traffic to
+		this specific service. Must be unique among all adaptation
+		services in squid.conf.
+
+	vectoring_point: reqmod_precache|reqmod_postcache|respmod_precache|respmod_postcache
+		This specifies at which point of transaction processing the
+		ICAP service should be activated. *_postcache vectoring points
+		are not yet supported.
+
+	uri: icap://servername:port/servicepath
+		ICAP server and service location.
+	     icaps://servername:port/servicepath
+		The "icap:" URI scheme is used for traditional ICAP server and
+		service location (default port is 1344, connections are not
+		encrypted). The "icaps:" URI scheme is for Secure ICAP
+		services that use SSL/TLS-encrypted ICAP connections (by
+		default, on port 11344).
+
+	ICAP does not allow a single service to handle both REQMOD and RESPMOD
+	transactions. Squid does not enforce that requirement. You can specify
+	services with the same service_url and different vectoring_points. You
+	can even specify multiple identical services as long as their
+	service_names differ.
+
+	To activate a service, use the adaptation_access directive. To group
+	services, use adaptation_service_chain and adaptation_service_set.
+
+	Service options are separated by white space. ICAP services support
+	the following name=value options:
+
+	bypass=on|off|1|0
+		If set to 'on' or '1', the ICAP service is treated as
+		optional. If the service cannot be reached or malfunctions,
+		Squid will try to ignore any errors and process the message as
+		if the service was not enabled. No all ICAP errors can be
+		bypassed.  If set to 0, the ICAP service is treated as
+		essential and all ICAP errors will result in an error page
+		returned to the HTTP client.
+
+		Bypass is off by default: services are treated as essential.
+
+	routing=on|off|1|0
+		If set to 'on' or '1', the ICAP service is allowed to
+		dynamically change the current message adaptation plan by
+		returning a chain of services to be used next. The services
+		are specified using the X-Next-Services ICAP response header
+		value, formatted as a comma-separated list of service names.
+		Each named service should be configured in squid.conf. Other
+		services are ignored. An empty X-Next-Services value results
+		in an empty plan which ends the current adaptation.
+
+		Dynamic adaptation plan may cross or cover multiple supported
+		vectoring points in their natural processing order.
+
+		Routing is not allowed by default: the ICAP X-Next-Services
+		response header is ignored.
+
+	ipv6=on|off
+		Only has effect on split-stack systems. The default on those systems
+		is to use IPv4-only connections. When set to 'on' this option will
+		make Squid use IPv6-only connections to contact this ICAP service.
+
+	on-overload=block|bypass|wait|force
+		If the service Max-Connections limit has been reached, do
+		one of the following for each new ICAP transaction:
+		  * block:  send an HTTP error response to the client
+		  * bypass: ignore the "over-connected" ICAP service
+		  * wait:   wait (in a FIFO queue) for an ICAP connection slot
+		  * force:  proceed, ignoring the Max-Connections limit
+
+		In SMP mode with N workers, each worker assumes the service
+		connection limit is Max-Connections/N, even though not all
+		workers may use a given service.
+
+		The default value is "bypass" if service is bypassable,
+		otherwise it is set to "wait".
+
+
+	max-conn=number
+		Use the given number as the Max-Connections limit, regardless
+		of the Max-Connections value given by the service, if any.
+
+	connection-encryption=on|off
+		Determines the ICAP service effect on the connections_encrypted
+		ACL.
+
+		The default is "on" for Secure ICAP services (i.e., those
+		with the icaps:// service URIs scheme) and "off" for plain ICAP
+		services.
+
+		Does not affect ICAP connections (e.g., does not turn Secure
+		ICAP on or off).
+
+	==== ICAPS / TLS OPTIONS ====
+
+	These options are used for Secure ICAP (icaps://....) services only.
+
+	tls-cert=/path/to/ssl/certificate
+			A client X.509 certificate to use when connecting to
+			this ICAP server.
+
+	tls-key=/path/to/ssl/key
+			The private key corresponding to the previous
+			tls-cert= option.
+
+			If tls-key= is not specified tls-cert= is assumed to
+			reference a PEM file containing both the certificate
+			and private key.
+
+	tls-cipher=...	The list of valid TLS/SSL ciphers to use when connecting
+			to this icap server.
+
+	tls-min-version=1.N
+			The minimum TLS protocol version to permit. To control
+			SSLv3 use the tls-options= parameter.
+			Supported Values: 1.0 (default), 1.1, 1.2
+
+	tls-options=...	Specify various OpenSSL library options:
+
+			    NO_SSLv3    Disallow the use of SSLv3
+
+			    SINGLE_DH_USE
+				      Always create a new key when using
+				      temporary/ephemeral DH key exchanges
+
+			    ALL       Enable various bug workarounds
+				      suggested as "harmless" by OpenSSL
+				      Be warned that this reduces SSL/TLS
+				      strength to some attacks.
+
+			See the OpenSSL SSL_CTX_set_options documentation for a
+			more complete list. Options relevant only to SSLv2 are
+			not supported.
+
+	tls-cafile=	PEM file containing CA certificates to use when verifying
+			the icap server certificate.
+			Use to specify intermediate CA certificate(s) if not sent
+			by the server. Or the full CA chain for the server when
+			using the tls-default-ca=off flag.
+			May be repeated to load multiple files.
+
+	tls-capath=...	A directory containing additional CA certificates to
+			use when verifying the icap server certificate.
+			Requires OpenSSL or LibreSSL.
+
+	tls-crlfile=...	A certificate revocation list file to use when
+			verifying the icap server certificate.
+
+	tls-flags=...	Specify various flags modifying the Squid TLS implementation:
+
+			DONT_VERIFY_PEER
+				Accept certificates even if they fail to
+				verify.
+			DONT_VERIFY_DOMAIN
+				Don't verify the icap server certificate
+				matches the server name
+
+	tls-default-ca[=off]
+			Whether to use the system Trusted CAs. Default is ON.
+
+	tls-domain=	The icap server name as advertised in it's certificate.
+			Used for verifying the correctness of the received icap
+			server certificate. If not specified the icap server
+			hostname extracted from ICAP URI will be used.
+
+	Older icap_service format without optional named parameters is
+	deprecated but supported for backward compatibility.
+
+Example:
+icap_service svcBlocker reqmod_precache icap://icap1.mydomain.net:1344/reqmod bypass=0
+icap_service svcLogger reqmod_precache icaps://icap2.mydomain.net:11344/reqmod routing=on
+
+
+
+[Index](index#toc_icap_service) | [Alphabetical Index](index_all#toc_icap_service)
+
