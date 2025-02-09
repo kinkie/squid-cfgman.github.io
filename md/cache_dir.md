@@ -18,8 +18,6 @@ permissions: GNU GPL v2
 
 ## Suggested Config:
 ```plaintext
-# Uncomment and adjust the following to add a disk cache directory.
-#cache_dir ufs /usr/local/squid/var/cache/squid 100 16 256
 
 ```
 
@@ -177,10 +175,11 @@ permissions: GNU GPL v2
 	Note: To make optimal use of the max-size limits you should order
 	the cache_dir lines with the smallest max-size value first.
 
-CONFIG_START
+```plaintext
 
-CONFIG_END
-
+# Uncomment and adjust the following to add a disk cache directory.
+#cache_dir ufs /usr/local/squid/var/cache/squid 100 16 256
+```
 
 
 [Index](index#toc_cache_dir) | [Alphabetical Index](index_all#toc_cache_dir)

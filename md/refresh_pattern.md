@@ -18,9 +18,6 @@ permissions: GNU GPL v2
 
 ## Suggested Config:
 ```plaintext
-#
-# Add any of your own refresh_pattern entries above these.
-#
 
 ```
 
@@ -123,13 +120,15 @@ permissions: GNU GPL v2
 	to change one. The default setting is only active if none is
 	used.
 
-CONFIG_START
+```plaintext
 
+#
+# Add any of your own refresh_pattern entries above these.
+#
 refresh_pattern ^ftp:		1440	20%	10080
 refresh_pattern -i (/cgi-bin/|\?) 0	0%	0
 refresh_pattern .		0	20%	4320
-CONFIG_END
-
+```
 
 
 [Index](index#toc_refresh_pattern) | [Alphabetical Index](index_all#toc_refresh_pattern)

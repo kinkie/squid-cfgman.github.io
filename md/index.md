@@ -4,7 +4,7 @@ keywords: squid squid.conf config configure
 description: Squid 3.1.0
 ---
 
-## 	WELCOME TO SQUID 8.0.0-VCS
+##	WELCOME TO SQUID 8.0.0-VCS
 
 	This is the documentation for the Squid configuration file.
 	This documentation can also be found online at:
@@ -25,7 +25,7 @@ description: Squid 3.1.0
 	- the comments for that keyword indicate if this is the case.
 
 
-##   Configuration options can be included using the "include" directive.
+##  Configuration options can be included using the "include" directive.
   Include takes a list of files to include. Quoting and wildcards are
   supported.
 
@@ -138,21 +138,21 @@ description: Squid 3.1.0
 	('-') in such cases. Not all macros have been tested.
 
 
-##  OPTIONS FOR SMP
+## OPTIONS FOR SMP
 
  * [workers](workers)
  * [cpu_affinity_map](cpu_affinity_map)
  * [shared_memory_locking](shared_memory_locking)
  * [hopeless_kid_revival_delay](hopeless_kid_revival_delay)
 
-##  OPTIONS FOR AUTHENTICATION
+## OPTIONS FOR AUTHENTICATION
 
  * [auth_param](auth_param)
  * [authenticate_cache_garbage_interval](authenticate_cache_garbage_interval)
  * [authenticate_ttl](authenticate_ttl)
  * [authenticate_ip_ttl](authenticate_ip_ttl)
 
-##  ACCESS CONTROLS
+## ACCESS CONTROLS
 
  * [external_acl_type](external_acl_type)
  * [acl](acl)
@@ -174,7 +174,7 @@ description: Squid 3.1.0
  * [on_unsupported_protocol](on_unsupported_protocol)
  * [auth_schemes](auth_schemes)
 
-##  NETWORK OPTIONS
+## NETWORK OPTIONS
 
  * [http_port](http_port)
  * [https_port](https_port)
@@ -189,11 +189,11 @@ description: Squid 3.1.0
  * [host_verify_strict](host_verify_strict)
  * [client_dst_passthru](client_dst_passthru)
 
-##  TLS OPTIONS
+## TLS OPTIONS
 
  * [tls_outgoing_options](tls_outgoing_options)
 
-##  SSL OPTIONS
+## SSL OPTIONS
 
  * [ssl_unclean_shutdown](ssl_unclean_shutdown)
  * [ssl_engine](ssl_engine)
@@ -207,14 +207,14 @@ description: Squid 3.1.0
  * [sslproxy_cert_adapt](sslproxy_cert_adapt)
  * [sslpassword_program](sslpassword_program)
 
-##  OPTIONS RELATING TO EXTERNAL SSL_CRTD
+## OPTIONS RELATING TO EXTERNAL SSL_CRTD
 
  * [sslcrtd_program](sslcrtd_program)
  * [sslcrtd_children](sslcrtd_children)
  * [sslcrtvalidator_program](sslcrtvalidator_program)
  * [sslcrtvalidator_children](sslcrtvalidator_children)
 
-##  OPTIONS WHICH AFFECT THE NEIGHBOR SELECTION ALGORITHM
+## OPTIONS WHICH AFFECT THE NEIGHBOR SELECTION ALGORITHM
 
  * [cache_peer](cache_peer)
  * [cache_peer_access](cache_peer_access)
@@ -222,7 +222,7 @@ description: Squid 3.1.0
  * [dead_peer_timeout](dead_peer_timeout)
  * [forward_max_tries](forward_max_tries)
 
-##  MEMORY CACHE OPTIONS
+## MEMORY CACHE OPTIONS
 
  * [cache_mem](cache_mem)
  * [maximum_object_size_in_memory](maximum_object_size_in_memory)
@@ -230,7 +230,7 @@ description: Squid 3.1.0
  * [memory_cache_mode](memory_cache_mode)
  * [memory_replacement_policy](memory_replacement_policy)
 
-##  DISK CACHE OPTIONS
+## DISK CACHE OPTIONS
 
  * [cache_replacement_policy](cache_replacement_policy)
  * [minimum_object_size](minimum_object_size)
@@ -242,7 +242,7 @@ description: Squid 3.1.0
  * [cache_swap_low](cache_swap_low)
  * [cache_swap_high](cache_swap_high)
 
-##  LOGFILE OPTIONS
+## LOGFILE OPTIONS
 
  * [logformat](logformat)
  * [access_log](access_log)
@@ -261,14 +261,14 @@ description: Squid 3.1.0
  * [netdb_filename](netdb_filename)
  * [tls_key_log](tls_key_log)
 
-##  OPTIONS FOR TROUBLESHOOTING
+## OPTIONS FOR TROUBLESHOOTING
 
  * [cache_log](cache_log)
  * [cache_log_message](cache_log_message)
  * [debug_options](debug_options)
  * [coredump_dir](coredump_dir)
 
-##  OPTIONS FOR FTP GATEWAYING
+## OPTIONS FOR FTP GATEWAYING
 
  * [ftp_user](ftp_user)
  * [ftp_passive](ftp_passive)
@@ -278,14 +278,14 @@ description: Squid 3.1.0
  * [ftp_sanitycheck](ftp_sanitycheck)
  * [ftp_telnet_protocol](ftp_telnet_protocol)
 
-##  OPTIONS FOR EXTERNAL SUPPORT PROGRAMS
+## OPTIONS FOR EXTERNAL SUPPORT PROGRAMS
 
  * [diskd_program](diskd_program)
  * [unlinkd_program](unlinkd_program)
  * [pinger_program](pinger_program)
  * [pinger_enable](pinger_enable)
 
-##  OPTIONS FOR URL REWRITING
+## OPTIONS FOR URL REWRITING
 
  * [url_rewrite_program](url_rewrite_program)
  * [url_rewrite_children](url_rewrite_children)
@@ -295,7 +295,7 @@ description: Squid 3.1.0
  * [url_rewrite_extras](url_rewrite_extras)
  * [url_rewrite_timeout](url_rewrite_timeout)
 
-##  OPTIONS FOR STORE ID
+## OPTIONS FOR STORE ID
 
  * [store_id_program](store_id_program)
  * [store_id_extras](store_id_extras)
@@ -303,7 +303,7 @@ description: Squid 3.1.0
  * [store_id_access](store_id_access)
  * [store_id_bypass](store_id_bypass)
 
-##  OPTIONS FOR TUNING THE CACHE
+## OPTIONS FOR TUNING THE CACHE
 
  * [cache](cache)
  * [send_hit](send_hit)
@@ -322,7 +322,7 @@ description: Squid 3.1.0
  * [store_avg_object_size](store_avg_object_size)
  * [store_objects_per_bucket](store_objects_per_bucket)
 
-##  HTTP OPTIONS
+## HTTP OPTIONS
 
  * [request_header_max_size](request_header_max_size)
  * [reply_header_max_size](reply_header_max_size)
@@ -344,7 +344,7 @@ description: Squid 3.1.0
  * [collapsed_forwarding_access](collapsed_forwarding_access)
  * [shared_transient_entries_limit](shared_transient_entries_limit)
 
-##  TIMEOUTS
+## TIMEOUTS
 
  * [forward_timeout](forward_timeout)
  * [connect_timeout](connect_timeout)
@@ -361,7 +361,7 @@ description: Squid 3.1.0
  * [server_idle_pconn_timeout](server_idle_pconn_timeout)
  * [shutdown_lifetime](shutdown_lifetime)
 
-##  ADMINISTRATIVE PARAMETERS
+## ADMINISTRATIVE PARAMETERS
 
  * [cache_mgr](cache_mgr)
  * [mail_from](mail_from)
@@ -374,12 +374,12 @@ description: Squid 3.1.0
  * [hostname_aliases](hostname_aliases)
  * [umask](umask)
 
-##  HTTPD-ACCELERATOR OPTIONS
+## HTTPD-ACCELERATOR OPTIONS
 
  * [httpd_accel_surrogate_id](httpd_accel_surrogate_id)
  * [http_accel_surrogate_remote](http_accel_surrogate_remote)
 
-##  DELAY POOL PARAMETERS
+## DELAY POOL PARAMETERS
 
  * [delay_pools](delay_pools)
  * [delay_class](delay_class)
@@ -387,7 +387,7 @@ description: Squid 3.1.0
  * [delay_parameters](delay_parameters)
  * [delay_initial_bucket_level](delay_initial_bucket_level)
 
-##  CLIENT DELAY POOL PARAMETERS
+## CLIENT DELAY POOL PARAMETERS
 
  * [client_delay_pools](client_delay_pools)
  * [client_delay_initial_bucket_level](client_delay_initial_bucket_level)
@@ -396,7 +396,7 @@ description: Squid 3.1.0
  * [response_delay_pool](response_delay_pool)
  * [response_delay_pool_access](response_delay_pool_access)
 
-##  WCCPv1 AND WCCPv2 CONFIGURATION OPTIONS
+## WCCPv1 AND WCCPv2 CONFIGURATION OPTIONS
 
  * [wccp_router](wccp_router)
  * [wccp2_router](wccp2_router)
@@ -411,7 +411,7 @@ description: Squid 3.1.0
  * [wccp_address](wccp_address)
  * [wccp2_address](wccp2_address)
 
-##  PERSISTENT CONNECTION HANDLING
+## PERSISTENT CONNECTION HANDLING
 
  Also see "pconn_timeout" in the TIMEOUTS section
 
@@ -420,7 +420,7 @@ description: Squid 3.1.0
  * [persistent_connection_after_error](persistent_connection_after_error)
  * [detect_broken_pconn](detect_broken_pconn)
 
-##  CACHE DIGEST OPTIONS
+## CACHE DIGEST OPTIONS
 
  * [digest_generation](digest_generation)
  * [digest_bits_per_entry](digest_bits_per_entry)
@@ -429,14 +429,14 @@ description: Squid 3.1.0
  * [digest_swapout_chunk_size](digest_swapout_chunk_size)
  * [digest_rebuild_chunk_percentage](digest_rebuild_chunk_percentage)
 
-##  SNMP OPTIONS
+## SNMP OPTIONS
 
  * [snmp_port](snmp_port)
  * [snmp_access](snmp_access)
  * [snmp_incoming_address](snmp_incoming_address)
  * [snmp_outgoing_address](snmp_outgoing_address)
 
-##  ICP OPTIONS
+## ICP OPTIONS
 
  * [icp_port](icp_port)
  * [htcp_port](htcp_port)
@@ -456,18 +456,18 @@ description: Squid 3.1.0
  * [minimum_icp_query_timeout](minimum_icp_query_timeout)
  * [background_ping_rate](background_ping_rate)
 
-##  MULTICAST ICP OPTIONS
+## MULTICAST ICP OPTIONS
 
  * [mcast_groups](mcast_groups)
  * [mcast_icp_query_timeout](mcast_icp_query_timeout)
 
-##  INTERNAL ICON OPTIONS
+## INTERNAL ICON OPTIONS
 
  * [icon_directory](icon_directory)
  * [global_internal_static](global_internal_static)
  * [short_icon_urls](short_icon_urls)
 
-##  ERROR PAGE OPTIONS
+## ERROR PAGE OPTIONS
 
  * [error_directory](error_directory)
  * [error_default_language](error_default_language)
@@ -477,7 +477,7 @@ description: Squid 3.1.0
  * [email_err_data](email_err_data)
  * [deny_info](deny_info)
 
-##  OPTIONS INFLUENCING REQUEST FORWARDING
+## OPTIONS INFLUENCING REQUEST FORWARDING
 
  * [nonhierarchical_direct](nonhierarchical_direct)
  * [prefer_direct](prefer_direct)
@@ -485,7 +485,7 @@ description: Squid 3.1.0
  * [always_direct](always_direct)
  * [never_direct](never_direct)
 
-##  ADVANCED NETWORKING OPTIONS
+## ADVANCED NETWORKING OPTIONS
 
  * [incoming_udp_average](incoming_udp_average)
  * [incoming_tcp_average](incoming_tcp_average)
@@ -497,7 +497,7 @@ description: Squid 3.1.0
  * [client_ip_max_connections](client_ip_max_connections)
  * [tcp_recv_bufsize](tcp_recv_bufsize)
 
-##  ICAP OPTIONS
+## ICAP OPTIONS
 
  * [icap_enable](icap_enable)
  * [icap_connect_timeout](icap_connect_timeout)
@@ -517,13 +517,13 @@ description: Squid 3.1.0
  * [icap_class](icap_class)
  * [icap_access](icap_access)
 
-##  eCAP OPTIONS
+## eCAP OPTIONS
 
  * [ecap_enable](ecap_enable)
  * [ecap_service](ecap_service)
  * [loadable_modules](loadable_modules)
 
-##  MESSAGE ADAPTATION OPTIONS
+## MESSAGE ADAPTATION OPTIONS
 
  * [adaptation_service_set](adaptation_service_set)
  * [adaptation_service_chain](adaptation_service_chain)
@@ -534,7 +534,7 @@ description: Squid 3.1.0
  * [icap_retry](icap_retry)
  * [icap_retry_limit](icap_retry_limit)
 
-##  DNS OPTIONS
+## DNS OPTIONS
 
  * [check_hostnames](check_hostnames)
  * [allow_underscore](allow_underscore)
@@ -552,7 +552,7 @@ description: Squid 3.1.0
  * [ipcache_high](ipcache_high)
  * [fqdncache_size](fqdncache_size)
 
-##  MISCELLANEOUS
+## MISCELLANEOUS
 
  * [configuration_includes_quoted_values](configuration_includes_quoted_values)
  * [memory_pools](memory_pools)

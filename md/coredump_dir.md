@@ -18,7 +18,6 @@ permissions: GNU GPL v2
 
 ## Suggested Config:
 ```plaintext
-# Leave coredumps in the first cache dir
 
 ```
 
@@ -34,11 +33,11 @@ permissions: GNU GPL v2
 	OS-specific, but look for prctl(2) PR_SET_DUMPABLE and procctl(2)
 	PROC_TRACE_CTL documentation as guiding examples.
 
-CONFIG_START
+```plaintext
 
+# Leave coredumps in the first cache dir
 coredump_dir /usr/local/squid/var/cache/squid
-CONFIG_END
-
+```
 
 
 [Index](index#toc_coredump_dir) | [Alphabetical Index](index_all#toc_coredump_dir)

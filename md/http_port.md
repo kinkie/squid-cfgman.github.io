@@ -18,7 +18,6 @@ permissions: GNU GPL v2
 
 ## Suggested Config:
 ```plaintext
-# Squid normally listens to port 3128
 
 ```
 
@@ -306,11 +305,11 @@ permissions: GNU GPL v2
 	internal address:port in http_port. This way Squid will only be
 	visible on the internal address.
 
-CONFIG_START
+```plaintext
 
+# Squid normally listens to port 3128
 http_port 3128
-CONFIG_END
-
+```
 
 
 [Index](index#toc_http_port) | [Alphabetical Index](index_all#toc_http_port)

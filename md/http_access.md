@@ -18,29 +18,6 @@ permissions: GNU GPL v2
 
 ## Suggested Config:
 ```plaintext
-#
-# Recommended minimum Access Permission configuration:
-#
-# Deny requests to certain unsafe ports
-# Deny CONNECT to other than secure SSL ports
-# Only allow cachemgr access from localhost
-# This default configuration only allows localhost requests because a more
-# permissive Squid installation could introduce new attack vectors into the
-# network by proxying external TCP connections to unprotected services.
-# The two deny rules below are unnecessary in this default configuration
-# because they are followed by a "deny all" rule. However, they may become
-# critically important when you start allowing external requests below them.
-# Protect web applications running on the same server as Squid. They often
-# assume that only local users can access them at "localhost" ports.
-# Protect cloud servers that provide local users with sensitive info about
-# their server via certain well-known link-local (a.k.a. APIPA) addresses.
-#
-# INSERT YOUR OWN RULE(S) HERE TO ALLOW ACCESS FROM YOUR CLIENTS
-#
-# For example, to allow access from your local networks, you may uncomment the
-# following rule (and/or add rules that match your definition of "local"):
-# http_access allow localnet
-# And finally deny all other access to this proxy
 
 ```
 
@@ -66,27 +43,49 @@ permissions: GNU GPL v2
 	This clause supports both fast and slow acl types.
 	See https://wiki.squid-cache.org/SquidFaq/SquidAcl for details.
 
-CONFIG_START
+```plaintext
 
+#
+# Recommended minimum Access Permission configuration:
+#
+# Deny requests to certain unsafe ports
 http_access deny !Safe_ports
 
+# Deny CONNECT to other than secure SSL ports
 http_access deny CONNECT !SSL_ports
 
+# Only allow cachemgr access from localhost
 http_access allow localhost manager
 http_access deny manager
 
+# This default configuration only allows localhost requests because a more
+# permissive Squid installation could introduce new attack vectors into the
+# network by proxying external TCP connections to unprotected services.
 http_access allow localhost
 
+# The two deny rules below are unnecessary in this default configuration
+# because they are followed by a "deny all" rule. However, they may become
+# critically important when you start allowing external requests below them.
 
+# Protect web applications running on the same server as Squid. They often
+# assume that only local users can access them at "localhost" ports.
 http_access deny to_localhost
 
+# Protect cloud servers that provide local users with sensitive info about
+# their server via certain well-known link-local (a.k.a. APIPA) addresses.
 http_access deny to_linklocal
 
+#
+# INSERT YOUR OWN RULE(S) HERE TO ALLOW ACCESS FROM YOUR CLIENTS
+#
 
+# For example, to allow access from your local networks, you may uncomment the
+# following rule (and/or add rules that match your definition of "local"):
+# http_access allow localnet
 
+# And finally deny all other access to this proxy
 http_access deny all
-CONFIG_END
-
+```
 
 
 [Index](index#toc_http_access) | [Alphabetical Index](index_all#toc_http_access)

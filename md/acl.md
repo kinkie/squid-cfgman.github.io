@@ -18,12 +18,6 @@ permissions: GNU GPL v2
 
 ## Suggested Config:
 ```plaintext
-#
-# Recommended minimum configuration:
-#
-# Example rule allowing access from your local networks.
-# Adapt to list your (internal) IP networks from where browsing
-# should be allowed
 
 ```
 
@@ -614,8 +608,14 @@ endif
 		acl fileupload req_mime_type -i ^multipart/form-data$
 		acl javascript rep_mime_type -i ^application/x-javascript$
 
-CONFIG_START
+```plaintext
+#
+# Recommended minimum configuration:
+#
 
+# Example rule allowing access from your local networks.
+# Adapt to list your (internal) IP networks from where browsing
+# should be allowed
 acl localnet src 0.0.0.1-0.255.255.255	# RFC 1122 "this" network (LAN)
 acl localnet src 10.0.0.0/8		# RFC 1918 local private network (LAN)
 acl localnet src 100.64.0.0/10		# RFC 6598 shared address space (CGN)
@@ -636,8 +636,7 @@ acl Safe_ports port 280		# http-mgmt
 acl Safe_ports port 488		# gss-http
 acl Safe_ports port 591		# filemaker
 acl Safe_ports port 777		# multiling http
-CONFIG_END
-
+```
 
 
 [Index](index#toc_acl) | [Alphabetical Index](index_all#toc_acl)
